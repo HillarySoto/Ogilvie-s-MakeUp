@@ -19,7 +19,7 @@ const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updC
 
     //envio de la data
     const sendData = () => {
-        
+
         if (client.id === 0) {
             saveClient(client);
         } else {
@@ -61,7 +61,7 @@ const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updC
                 <hr></hr>
                 <Form>
                     <FormGroup>
-                        <Label>Cedula</Label>
+                        <Label>Cédula</Label>
                         <Input type="text" name="cedula" onChange={(ev) => updateData(ev)} value={client.cedula} placeholder="Ingrese la cédula" />
                     </FormGroup>
                     <FormGroup>
@@ -88,12 +88,14 @@ const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updC
                             dateFormat="dd/MM/yyyy"
                         />
                     </FormGroup>
-                    <Button type="button" color="primary" size="sm" onClick={sendData}>
-                        Guardar
-                    </Button>
-                    <Button type="button" color="danger" size="sm" onClick={closeForm}>
-                        Cancelar
-                    </Button>
+                    <div className="d-flex justify-content-center">
+                        <Button type="button" color="primary" size="lg" className="me-2" onClick={sendData}>
+                            Guardar
+                        </Button>{' '}
+                        <Button type="button" color="danger" size="lg" onClick={closeForm}>
+                            Cancelar
+                        </Button>
+                    </div>
                 </Form>
             </Col>
         </Row>

@@ -15,5 +15,9 @@ public partial class Pago
 
     public string? Referencia { get; set; }
 
+    public string? numeroTarjeta { get; set; }
+
+    public string? codigoTarjeta { get; set; }
+
     public string? Estado { get; set; }
 }

@@ -70,11 +70,11 @@ public partial class ProyectoAnalisisContext : DbContext
                 .HasColumnName("estado");
             entity.Property(e => e.FechaPago)
                 .HasColumnType("date")
-                .HasColumnName("fecha_pago");
+                .HasColumnName("fechaPago");
             entity.Property(e => e.MetodoPago)
                 .HasMaxLength(30)
                 .IsUnicode(false)
-                .HasColumnName("metodo_pago");
+                .HasColumnName("metodoPago");
             entity.Property(e => e.Monto).HasColumnName("monto");
             entity.Property(e => e.Referencia)
                 .HasMaxLength(50)

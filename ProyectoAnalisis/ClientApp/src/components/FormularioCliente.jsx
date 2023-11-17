@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { validateEmail, validarLetra, validarNumero, validateLettersAndNumber } from "../services/InputValidate";
+import { validateEmail, validarLetra, validarNumero, vad_alfanumerico } from "../services/InputValidate";
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; //dar estilo al datepicker
 import { Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
@@ -12,7 +12,9 @@ const clientModel = {
     telefono: "",
     email: "",
     direccion: "",
-    fechaRegistro: null
+    fechaRegistro: new Date().toLocaleDateString().toString(),
+    contrasenia: ""
+    
 }
 
 const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updClient }) => {
@@ -82,38 +84,45 @@ const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updC
                         <Label>Dirección</Label>
                         <Input type="text" name="direccion" maxLength={100} onChange={(ev) => updateData(ev)} value={client.direccion} placeholder="Ingrese la dirección" />
                     </FormGroup>
-                    <FormGroup>
-                        <Label>Fecha de Registro</Label>
+                   {/* <FormGroup>
+                        <Label>Fecha de Registro:</Label>{' '}
                         <ReactDatePicker name="fechaRegistro"
                             selected={client.fechaRegistro ? new Date(client.fechaRegistro) : null} //convierte la cadena fechaRegistro a date
                             onChange={(date) => updateData({ target: { name: 'fechaRegistro', value: date } })}
                             dateFormat="dd/MM/yyyy"
                         />
+                    </FormGroup> */}
+                    <FormGroup>
+                        <Label>Contraseña</Label>
+                        <Input type="password" name="contrasenia" onChange={(ev) => updateData(ev)} value={client.contrasenia} placeholder="Contraseña" />
                     </FormGroup>
+
                     <div className="d-flex justify-content-center">
+
                         <Button type="button" color="primary" size="lg" className="me-2" onClick={() => {
 
-                            const validations = {
+                            /*const validations = {
                                 cedula: validarNumero(client.cedula),
                                 telefono: validarNumero(client.telefono),
                                 nombre: validarLetra(client.nombre),
                                 email: validateEmail(client.email),
-                                direccion: validateLettersAndNumber(client.direccion),
+                                direccion: vad_alfanumerico(client.direccion),
+                                contrasenia: vad_alfanumerico(client.contrasenia)
                             };
 
                             //evalua cada campo
                             const isValid = Object.values(validations).every((validation) => validation);
 
-                            if (isValid) {
+                            if (isValid) {*/
                                 sendData();
-                            } else {
+                            /*} else {
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Entrada(s) invalida(s)',
                                     text: 'Hay campos vacíos o entradas inválidas, por favor verifique!',
                                     allowOutsideClick: false
                                 });
-                            }
+                            } */
 
                         }}>
                             Guardar

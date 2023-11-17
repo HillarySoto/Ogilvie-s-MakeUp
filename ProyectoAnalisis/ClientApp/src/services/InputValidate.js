@@ -24,7 +24,7 @@ export const validateEmail = (value) => {
   return emailregex.test(value)  && value.trim() !== '';
 }
 
-export const validateLettersAndNumber = (value) => {
-  const alphanumericregex = /^[a-zA-Z0-9,]+$/;
+export const vad_alfanumerico = (value) => {
+  const alphanumericregex = /^[a-zA-Z0-9]+$/;
   return alphanumericregex.test(value)  && value.trim() !== '';
 }

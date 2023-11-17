@@ -1,9 +1,21 @@
 
 import { Container, Row, Col, Button, Table } from "reactstrap";
+import {getPayments} from "../services/PagoServicio";
+import { useEffect, useState } from "react";
 
 
-const TablaPagos = ({ data }) => {
+const TablaPagos = () => {
 
+    const [pagos, setPagos] = useState([]);
+
+    const payments = async () => {
+        const data = await getPayments(); //llama al servicio
+        setPagos(data);
+    }
+
+    useEffect(() => {
+        payments();
+    }, [pagos]);
 
     return (
 
@@ -27,12 +39,12 @@ const TablaPagos = ({ data }) => {
                             </thead>
                             <tbody>
                                 {
-                                    (data.length < 1) ? (
+                                    (pagos.length < 1) ? (
                                         <tr>
-                                            <td colSpan="6">Sin registros</td>
+                                            <td colSpan="7">Sin registros</td>
                                         </tr>
                                     ) : (
-                                        data.map((item) => (
+                                        pagos.map((item) => (
 
                                             <tr key={item.id}>
                                                 <td>{item.fechaPago}</td>

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { validateEmail, validarLetra, validarNumero, validateLettersAndNumber } from "../services/InputValidate";
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; //dar estilo al datepicker
 import { Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
@@ -62,23 +64,23 @@ const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updC
                 <Form>
                     <FormGroup>
                         <Label>Cédula</Label>
-                        <Input type="text" name="cedula" onChange={(ev) => updateData(ev)} value={client.cedula} placeholder="Ingrese la cédula" />
+                        <Input type="text" name="cedula" maxLength={9} onChange={(ev) => updateData(ev)} value={client.cedula} placeholder="Ingrese la cédula" />
                     </FormGroup>
                     <FormGroup>
                         <Label>Nombre</Label>
-                        <Input type="text" name="nombre" onChange={(ev) => updateData(ev)} value={client.nombre} placeholder="Ingrese el nombre" />
+                        <Input type="text" name="nombre" maxLength={50} onChange={(ev) => updateData(ev)} value={client.nombre} placeholder="Ingrese el nombre" />
                     </FormGroup>
                     <FormGroup>
                         <Label>Teléfono</Label>
-                        <Input type="text" name="telefono" onChange={(ev) => updateData(ev)} value={client.telefono} placeholder="Ingrese el número de teléfono" />
+                        <Input type="text" name="telefono" maxLength={8} onChange={(ev) => updateData(ev)} value={client.telefono} placeholder="Ingrese el número de teléfono" />
                     </FormGroup>
                     <FormGroup>
                         <Label>Correo</Label>
-                        <Input type="text" name="email" onChange={(ev) => updateData(ev)} value={client.email} placeholder="Ingrese el correo" />
+                        <Input type="text" name="email" maxLength={30} onChange={(ev) => updateData(ev)} value={client.email} placeholder="Ingrese el correo" />
                     </FormGroup>
                     <FormGroup>
                         <Label>Dirección</Label>
-                        <Input type="text" name="direccion" onChange={(ev) => updateData(ev)} value={client.direccion} placeholder="Ingrese la dirección" />
+                        <Input type="text" name="direccion" maxLength={100} onChange={(ev) => updateData(ev)} value={client.direccion} placeholder="Ingrese la dirección" />
                     </FormGroup>
                     <FormGroup>
                         <Label>Fecha de Registro</Label>
@@ -89,7 +91,31 @@ const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updC
                         />
                     </FormGroup>
                     <div className="d-flex justify-content-center">
-                        <Button type="button" color="primary" size="lg" className="me-2" onClick={sendData}>
+                        <Button type="button" color="primary" size="lg" className="me-2" onClick={() => {
+
+                            const validations = {
+                                cedula: validarNumero(client.cedula),
+                                telefono: validarNumero(client.telefono),
+                                nombre: validarLetra(client.nombre),
+                                email: validateEmail(client.email),
+                                direccion: validateLettersAndNumber(client.direccion),
+                            };
+
+                            //evalua cada campo
+                            const isValid = Object.values(validations).every((validation) => validation);
+
+                            if (isValid) {
+                                sendData();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Entrada(s) invalida(s)',
+                                    text: 'Hay campos vacíos o entradas inválidas, por favor verifique!',
+                                    allowOutsideClick: false
+                                });
+                            }
+
+                        }}>
                             Guardar
                         </Button>{' '}
                         <Button type="button" color="danger" size="lg" onClick={closeForm}>

@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, CardHeader, CardBody, Button } from "reactstrap";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import Sidebar from "react-sidebar";
+
 import ModalProveedor from "./componentes/ModalProveedor";
 import TablaProveedor from "./componentes/TablaProveedor";
+import ModalProducto from "./componentes/ModalProducto";
+import TablaProducto from "./componentes/TablaProducto";
 
 const App = () => {
     const [proveedores, setProveedores] = useState([]);
-    const [mostrarModal, setMostrarModal] = useState(false);
-    const [editar, setEditar] = useState(null);
+    const [productos, setProductos] = useState([]);
+    const [mostrarModalProveedor, setMostrarModalProveedor] = useState(false);
+    const [mostrarModalProducto, setMostrarModalProducto] = useState(false);
+    const [editarProveedor, setEditarProveedor] = useState(null);
+    const [editarProducto, setEditarProducto] = useState(null);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    const onSetSidebarOpen = (open) => {
+        setSidebarOpen(open);
+    };
 
     const fetchData = async (url, options = {}) => {
         try {
@@ -33,9 +45,19 @@ const App = () => {
         }
     };
 
+    const mostrarProductos = async () => {
+        try {
+            const data = await fetchData("/api/producto/lista");
+            setProductos(data);
+        } catch (error) {
+            console.error("Error al obtener la lista de productos:", error);
+        }
+    };
+
     useEffect(() => {
         mostrarProveedores();
-    }, [mostrarModal]); // <-- Agregado mostrarModal como dependencia
+        mostrarProductos();
+    }, [mostrarModalProveedor, mostrarModalProducto]);
 
     const handleGuardarProveedor = async (proveedor) => {
         try {
@@ -47,11 +69,11 @@ const App = () => {
                 body: JSON.stringify(proveedor),
             });
 
-            setMostrarModal(false);
+            setMostrarModalProveedor(false);
         } catch (error) {
             console.error("Error al guardar el proveedor:", error);
         } finally {
-            mostrarProveedores(); // <-- Llamar a mostrarProveedores después de la operación asincrónica
+            mostrarProveedores();
         }
     };
 
@@ -65,16 +87,16 @@ const App = () => {
                 body: JSON.stringify(proveedor),
             });
 
-            setMostrarModal(false);
+            setMostrarModalProveedor(false);
         } catch (error) {
             console.error("Error al editar el proveedor:", error);
         } finally {
-            mostrarProveedores(); // <-- Llamar a mostrarProveedores después de la operación asincrónica
+            mostrarProveedores();
         }
     };
 
     const handleEliminarProveedor = async (id) => {
-        const respuesta = window.confirm("¿Desea eliminar el proveedor?");
+        const respuesta = window.confirm("Â¿Desea eliminar el proveedor?");
 
         if (!respuesta) {
             return;
@@ -87,41 +109,139 @@ const App = () => {
         } catch (error) {
             console.error("Error al eliminar el proveedor:", error);
         } finally {
-            mostrarProveedores(); // <-- Llamar a mostrarProveedores después de la operación asincrónica
+            mostrarProveedores();
+        }
+    };
+
+    const handleGuardarProducto = async (producto) => {
+        try {
+            await fetchData("api/producto/Guardar", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(producto),
+            });
+
+            setMostrarModalProducto(false);
+        } catch (error) {
+            console.error("Error al guardar el producto:", error);
+        } finally {
+            mostrarProductos();
+        }
+    };
+
+    const handleEditarProducto = async (producto) => {
+        try {
+            await fetchData("api/producto/Editar", {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(producto),
+            });
+
+            setMostrarModalProducto(false);
+        } catch (error) {
+            console.error("Error al editar el producto:", error);
+        } finally {
+            mostrarProductos();
+        }
+    };
+
+    const handleEliminarProducto = async (id) => {
+        const respuesta = window.confirm("Â¿Desea eliminar el producto?");
+
+        if (!respuesta) {
+            return;
+        }
+
+        try {
+            await fetchData(`api/producto/Eliminar/${id}`, {
+                method: 'DELETE',
+            });
+        } catch (error) {
+            console.error("Error al eliminar el producto:", error);
+        } finally {
+            mostrarProductos();
         }
     };
 
     return (
         <Router>
-            <Container>
-                <Row>
-                    <Col>
-                        <Card>
-                            <CardHeader>Proveedores</CardHeader>
-                            <CardBody>
-                                <Button color="success" onClick={() => setMostrarModal(true)}>
-                                    Nuevo Proveedor
-                                </Button>
-                                <TablaProveedor
-                                    data={proveedores}
-                                    setEditar={setEditar}
-                                    mostrarModal={mostrarModal}
-                                    setMostrarModal={setMostrarModal}
-                                    eliminarProveedor={handleEliminarProveedor}
-                                />
-                                <ModalProveedor
-                                    mostrarModal={mostrarModal}
-                                    setMostrarModal={setMostrarModal}
-                                    guardarProveedor={handleGuardarProveedor}
-                                    editar={editar}
-                                    setEditar={setEditar}
-                                    editarProveedor={handleEditarProveedor}
-                                />
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
+            <Sidebar
+                sidebar={
+                    <div>
+                        <h2>MenÃº</h2>
+                        <Link to="/proveedores">Proveedores</Link>
+                        <Link to="/productos">Productos</Link>
+                    </div>
+                }
+                open={sidebarOpen}
+                onSetOpen={onSetSidebarOpen}
+                styles={{ sidebar: { background: "white", width: "200px" } }}
+            >
+                <Container>
+                    <Row>
+                        <Col>
+                            <Card>
+                                <CardHeader>
+                                    <Button onClick={() => onSetSidebarOpen(true)}>â˜° MenÃº</Button>
+                                    Proveedores
+                                </CardHeader>
+                                <CardBody>
+                                    <Routes>
+                                        <Route path="/proveedores" element={
+                                            <div>
+                                                <Button color="success" onClick={() => setMostrarModalProveedor(true)}>
+                                                    Nuevo Proveedor
+                                                </Button>
+                                                <TablaProveedor
+                                                    data={proveedores}
+                                                    setEditar={setEditarProveedor}
+                                                    mostrarModal={mostrarModalProveedor}
+                                                    setMostrarModal={setMostrarModalProveedor}
+                                                    eliminarProveedor={handleEliminarProveedor}
+                                                />
+                                                <ModalProveedor
+                                                    mostrarModal={mostrarModalProveedor}
+                                                    setMostrarModal={setMostrarModalProveedor}
+                                                    guardarProveedor={handleGuardarProveedor}
+                                                    editar={editarProveedor}
+                                                    setEditar={setEditarProveedor}
+                                                    editarProveedor={handleEditarProveedor}
+                                                />
+                                            </div>
+                                        } />
+                                        <Route path="/productos" element={
+                                            <div>
+                                                <Button color="success" onClick={() => setMostrarModalProducto(true)}>
+                                                    Nuevo Producto
+                                                </Button>
+                                                <TablaProducto
+                                                    data={productos}
+                                                    setEditar={setEditarProducto}
+                                                    mostrarModal={mostrarModalProducto}
+                                                    setMostrarModal={setMostrarModalProducto}
+                                                    eliminarProducto={handleEliminarProducto}
+                                                />
+                                                <ModalProducto
+                                                    mostrarModal={mostrarModalProducto}
+                                                    setMostrarModal={setMostrarModalProducto}
+                                                    guardarProducto={handleGuardarProducto}
+                                                    editar={editarProducto}
+                                                    setEditar={setEditarProducto}
+                                                    editarProducto={handleEditarProducto}
+                                                />
+                                            </div>
+                                        } />
+                                    </Routes>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </Sidebar>
         </Router>
     );
 };

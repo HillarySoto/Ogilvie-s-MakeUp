@@ -7,17 +7,23 @@ CREATE TABLE clientes(
 	telefono varchar(8),
 	email varchar(30),
 	direccion varchar(100),
-	fechaRegistro date
+	fechaRegistro date default GETDATE(),
+	contrasenia varchar(8)
+
 	);
-	alter table clientes set
+
 CREATE TABLE pagos(
 	id int primary key identity,
-	fechaPago date,
+	fechaPago date default GETDATE(),
 	monto int,
 	metodoPago varchar(30),
 	referencia varchar(50),
+	numeroTarjeta varchar(23),
+	codigoTarjeta varchar(3),
 	estado varchar(20)
 	);
+
+
 
 	INSERT INTO clientes (cedula, nombre, telefono, email, direccion, fechaRegistro, contrasenia)
 VALUES

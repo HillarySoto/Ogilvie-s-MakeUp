@@ -5,7 +5,6 @@ import { Card, CardHeader, Form, FormGroup, Label, Input, Button, CardBody } fro
 
 const pagoModel = {
     id: 0,
-    fecha_pago: new Date().toLocaleDateString().toString(),
     monto: 25000,
     metodoPago: "",
     referencia: Math.floor(Math.random() * 100000000000).toString(),
@@ -35,14 +34,6 @@ const FormularioPago = ({ savePayment }) => {
                     </CardHeader>
                     <CardBody>
                         <Form >
-                            <FormGroup>
-                                <div className="d-flex justify-content-between">
-                                    <Label className="form-label">Fecha de Pago: </Label>{' '}
-                                    <Label name="fecha_pago" className="form-label">{pago.fecha_pago}
-                                    </Label>
-                                </div>
-                            </FormGroup>
-                            <hr />
                             <FormGroup>
                                 <div className="d-flex justify-content-between">
                                     <Label for="referencia">Referencia:</Label>{' '}
@@ -113,14 +104,14 @@ const FormularioPago = ({ savePayment }) => {
                             <Button color="primary" onClick={() => {
 
                                 //validacion de campos y alerta
-                                if(validarNumero(pago.numeroTarjeta) === false || validarNumero(pago.codigoTarjeta) === false){
+                                if (validarNumero(pago.numeroTarjeta) === false || validarNumero(pago.codigoTarjeta) === false) {
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Entrada(s) invalida(s)',
                                         text: 'Hay campos vacios o entradas invalidas, por favor verifique!',
                                         allowOutsideClick: false
                                     })
-                                }else{
+                                } else {
                                     pago.estado = "Pagado"
                                     savePayment(pago);
                                 }

@@ -19,5 +19,5 @@ public partial class Cliente
 
     public DateTime? FechaRegistro { get; set; }
 
-    public string? Contrasenia {get; set;}
+    public string? Contrasenia { get; set; }
 }

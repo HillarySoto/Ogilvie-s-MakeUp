@@ -9,11 +9,11 @@ using ProyectoAnalisis.Models;
 
 namespace ProyectoAnalisis.Controllers
 {
-    [Route("api/[controller]")]
+   [Route("api/[controller]")]
     [ApiController]
     public class ClientesController : ControllerBase
     {
-        private readonly ProyectoAnalisisContext _context;
+       private readonly ProyectoAnalisisContext _context;
 
         public ClientesController(ProyectoAnalisisContext context)
         {

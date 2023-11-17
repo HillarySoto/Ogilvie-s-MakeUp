@@ -25,6 +25,7 @@ const ClientsPage = () => {
             getClients();
         }
         setShowForm(!showForm);
+        setUpdate(null);
     }
 
 

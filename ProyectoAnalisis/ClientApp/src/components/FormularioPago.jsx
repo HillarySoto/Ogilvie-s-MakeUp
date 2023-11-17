@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import { validarNumero } from "../services/InputValidate";
 import { Card, CardHeader, Form, FormGroup, Label, Input, Button, CardBody } from 'reactstrap';
 
@@ -15,6 +16,7 @@ const pagoModel = {
 
 const FormularioPago = ({ savePayment }) => {
 
+    const navigate = useNavigate();
     const [pago, setPago] = useState(pagoModel);
 
     //modificacion de los atributos del modelo de pago (pagoModel)
@@ -114,6 +116,7 @@ const FormularioPago = ({ savePayment }) => {
                                 } else {
                                     pago.estado = "Pagado"
                                     savePayment(pago);
+                                    navigate("/listapagos");
                                 }
                             }}>
                                 Enviar Pago

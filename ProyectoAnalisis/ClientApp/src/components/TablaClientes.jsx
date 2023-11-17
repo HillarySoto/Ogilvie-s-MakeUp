@@ -13,7 +13,7 @@ const TablaClientes = ({ data, setUpdate, showForm, setShowForm, deleteClient })
 
     return (
 
-        <Table class = "table table-striped">
+        <Table className = "table table-striped table-hover">
             <thead>
                 <tr>
                     <th>Cedula</th>

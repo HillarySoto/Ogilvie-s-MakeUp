@@ -21,16 +21,25 @@ const ModalInventario = ({ mostrarModal, setMostrarModal, guardarInventario, edi
 
     const [inventario, setInventario] = useState(modeloInventario);
 
-    const actualizarDato = (e) => { // logica para la actualizacion del modal en pantalla
+    const actualizarDato = (e) => {
+        const { name, value } = e.target;
 
-        console.log(e.target.name + " : " + e.target.value)
-        setInventario(
-            {
-                ...inventario,
-                [e.target.name] : e.target.value
-            }
-        )
-    }
+        if (name === "cantidad" && !/^\d+$/.test(value)) {
+            // Si el campo es cantidad y no contiene solo números
+            return; // No actualizamos el estado
+        }
+
+        if (["producto", "nombre", "descripcion"].includes(name) && /[^a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]/.test(value)) {
+            // Si el campo es producto, nombre o descripcion, y contiene caracteres que no son letras ni espacios ni tildes
+            return; // No actualizamos el estado
+        }
+
+        setInventario({
+            ...inventario,
+            [name]: value
+        });
+    };
+
 
 
     const enviarDatos = () => { // logica para enviar los datos al SQL

@@ -1,4 +1,3 @@
-/* ESTO ERA EL INDEX ORIGINAL
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -12,7 +11,7 @@ root.render(
     <App />
 ) 
 
-*/
+/*
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -25,4 +24,4 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
     <Dashboard />
-)
+) */

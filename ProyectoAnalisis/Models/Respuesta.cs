@@ -1,15 +1,17 @@
-using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
 
-namespace OgilviesMakeUpModulos.Models;
+namespace ProyectoAnalisis.Models;
 
- public class Respuesta
+public partial class Respuesta
 {
     public int IdRespuesta { get; set; }
-    public int? IdConsulta { get; set; }  // Nullable int
-    public string Detalles { get; set; }
-    public DateTime Fecha { get; set; }
 
-    
-  [JsonIgnore]
-    public Consulta Consulta { get; set; }
+    public int? IdConsulta { get; set; }
+
+    public string? Detalles { get; set; }
+
+    public DateTime? Fecha { get; set; }
+
+    public virtual Consulta? IdConsultaNavigation { get; set; }
 }

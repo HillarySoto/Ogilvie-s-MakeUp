@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OgilviesMakeUpModulos.Models;
 using System.Threading.Tasks; // Asegúrate de importar System.Threading.Tasks.
 
 namespace OgilviesMakeUpModulos.Controllers

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OgilviesMakeUpProject.Models;
+namespace ProyectoAnalisis.Models;
 
-public partial class Proveedor
+public partial class Proveedore
 {
     public int Id { get; set; }
 

@@ -5,6 +5,10 @@ namespace ProyectoAnalisis.Models;
 
 public partial class Pago
 {
+    public int? IdProducto { get; set; }
+
+    public int? IdCliente { get; set; }
+
     public int Id { get; set; }
 
     public DateTime? FechaPago { get; set; }
@@ -20,4 +24,8 @@ public partial class Pago
     public string? CodigoTarjeta { get; set; }
 
     public string? Estado { get; set; }
+
+    public virtual Cliente? IdClienteNavigation { get; set; }
+
+    public virtual Producto? IdProductoNavigation { get; set; }
 }

@@ -1,4 +1,7 @@
-﻿namespace ProyectoMaquillajeN.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace ProyectoAnalisis.Models;
 
 public partial class Devolucione
 {

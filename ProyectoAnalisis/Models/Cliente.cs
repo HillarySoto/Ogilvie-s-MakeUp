@@ -20,4 +20,6 @@ public partial class Cliente
     public DateTime? FechaRegistro { get; set; }
 
     public string? Contrasenia { get; set; }
+
+    public virtual ICollection<Pago> Pagos { get; set; } = new List<Pago>();
 }

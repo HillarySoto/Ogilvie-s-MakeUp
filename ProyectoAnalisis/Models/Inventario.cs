@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ogilvie_s_MakeUp.Models;
+namespace ProyectoAnalisis.Models;
 
 public partial class Inventario
 {
-    public int IdInventario { get; set; }
+    public int Id { get; set; }
 
-    public string? Producto { get; set; }
-
-    public string? Nombre { get; set; }
+    public int? IdProducto { get; set; }
 
     public string? Descripcion { get; set; }
 
@@ -20,4 +18,6 @@ public partial class Inventario
     public DateTime? FechaCaduca { get; set; }
 
     public bool? Estado { get; set; }
+
+    public virtual Producto IdNavigation { get; set; } = null!;
 }

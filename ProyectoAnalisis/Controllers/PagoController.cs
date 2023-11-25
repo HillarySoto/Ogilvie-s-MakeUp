@@ -9,13 +9,13 @@ using ProyectoAnalisis.Models;
 
 namespace ProyectoAnalisis.Controllers
 {
-  /* [Route("api/[controller]")]
+   [Route("api/[controller]")]
     [ApiController]
     public class PagoController : ControllerBase
     {
-        private readonly ProyectoAnalisisContext _context;
+        private readonly OgilviesmakeupContext _context;
 
-        public PagoController(ProyectoAnalisisContext context)
+        public PagoController(OgilviesmakeupContext context)
         {
             _context = context;
         }
@@ -119,5 +119,5 @@ namespace ProyectoAnalisis.Controllers
         {
             return (_context.Pagos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-    }*/
+    }
 }

@@ -8,8 +8,6 @@ const context =  [
     "/weatherforecast",
     "/api/Clientes",
     "/api/Pago",
-    "/api/encuesta",
-    "/api/inventario"
 ];
 
 module.exports = function(app) {

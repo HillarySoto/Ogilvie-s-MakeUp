@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProyectoMaquillajeN.Models;
 
 namespace ProyectoMaquillajeN.Controllers
 {

@@ -9,7 +9,7 @@ using ProyectoAnalisis.Models;
 
 namespace ProyectoAnalisis.Controllers
 {
-   [Route("api/[controller]")]
+  /* [Route("api/[controller]")]
     [ApiController]
     public class PagoController : ControllerBase
     {
@@ -119,5 +119,5 @@ namespace ProyectoAnalisis.Controllers
         {
             return (_context.Pagos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-    }
+    }*/
 }

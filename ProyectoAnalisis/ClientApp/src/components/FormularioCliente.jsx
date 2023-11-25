@@ -113,6 +113,7 @@ const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updC
                                             icon: 'error',
                                             title: 'Entrada(s) invalida(s)',
                                             text: 'Hay campos vacíos o entradas inválidas, por favor verifique!',
+                                            cancelButtonColor: 'cancelar',
                                             allowOutsideClick: false
                                         });
                                     }

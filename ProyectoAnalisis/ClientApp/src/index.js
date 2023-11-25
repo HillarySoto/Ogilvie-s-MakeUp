@@ -1,16 +1,17 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import FormularioEnvio from "./FormularioEnvio";
+import FormularioEnvio from "./components/FormularioEnvio";
 
-import ListaPedidos from "./Pedidos";
-import Navbar from "./components/NavMenu";
-import ListaEnvios from "./Envios";
-import ModificarPedidoForm from "./FormularioPedido";
-import CrearConsultaForm from "./CrearConsultaForm";
-import ListaConsultas from "./ListaConsultas";
-import Sidebar from "./components/Sidebar";
-import EditarEnvio from "./EditarEnvio";
+import ListaPedidos from "./components/Pedidos";
+import Navbar from "./sidebarfiles/NavMenu";
+import ListaEnvios from "./components/Envios";
+import ModificarPedidoForm from "./components/FormularioPedido";
+import CrearConsultaForm from "./components/CrearConsultaForm";
+import ListaConsultas from "./components/ListaConsultas";
+import Sidebar from "./sidebarfiles/Sidebar";
+import EditarEnvio from "./components/EditarEnvio";
+import ClientsPage from "./pages/ClientsPage";
 //SBAdmin2 Style
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
                     <Route path="/" element={<ListaPedidos />}>
                         <Route index element={<ListaPedidos />} />
                     </Route>
+                    <Route path="/clientes" element={<ClientsPage/>}/>
                     <Route path="/pedidos" element={<ListaPedidos />} />
                     <Route path="/envios" element={<ListaEnvios />} />
                     <Route path="/formulario-consulta" element={<CrearConsultaForm />} />

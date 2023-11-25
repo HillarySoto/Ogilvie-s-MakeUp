@@ -1,11 +1,11 @@
-//using ProyectoAnalisis.Models;
+using ProyectoAnalisis.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-//builder.Services.AddDbContext<OgilviesmakeupContext>();
+builder.Services.AddDbContext<OgilviesmakeupContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

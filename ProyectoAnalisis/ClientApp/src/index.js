@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FormularioEnvio from "./components/FormularioEnvio";
-
+import ProveedorPage from "./pages/ProveedorPage";
 import ListaPedidos from "./components/Pedidos";
 import Navbar from "./sidebarfiles/NavMenu";
 import ListaEnvios from "./components/Envios";
@@ -23,6 +23,7 @@ export default function App() {
                     <Route path="/" element={<ListaPedidos />}>
                         <Route index element={<ListaPedidos />} />
                     </Route>
+                    <Route path="/proveedores" element={<ProveedorPage/>}/>
                     <Route path="/clientes" element={<ClientsPage/>}/>
                     <Route path="/pedidos" element={<ListaPedidos />} />
                     <Route path="/envios" element={<ListaEnvios />} />

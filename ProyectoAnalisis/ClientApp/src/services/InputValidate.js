@@ -2,8 +2,7 @@
 //validar letras
 export const validarLetra = (value) => {
 
-  if (/^(?=.*[a-zA-Z])\s*[a-zA-Z\s]*$/
-  .test(value)) {
+  if (/^(?=.*[a-zA-ZáéíóúÁÉÍÓÚ])\s*[a-zA-ZáéíóúÁÉÍÓÚ\s]*$/.test(value)) {
 
     return true;
 
@@ -26,6 +25,6 @@ export const validateEmail = (value) => {
 }
 
 export const vad_alfanumerico = (value) => {
-  const alphanumericregex = /^(?=.*[a-zA-Z0-9])[\w\s,()]*$/;
+  const alphanumericregex = /^(?=.*[a-zA-Z0-9])[\w\s,()áéíóúÁÉÍÓÚüÜñÑ]+$/u;
   return alphanumericregex.test(value);
 }

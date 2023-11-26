@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ProyectoAnalisis.Models;
 
-public partial class Proveedore
+public partial class Proveedores
 {
     public int Id { get; set; }
 

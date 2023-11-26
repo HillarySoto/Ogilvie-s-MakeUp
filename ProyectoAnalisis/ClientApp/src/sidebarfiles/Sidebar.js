@@ -44,6 +44,35 @@ const Sidebar = () => {
       {/* Divider */}
       <hr className="sidebar-divider my-0" />
 
+      {/* Nav Item Proveedores - Proveedores Collapse Menu *****************************/}
+      <li className="nav-item">
+        <a
+          className="nav-link"
+          onClick={() => handleMenuToggle('providers')}
+          aria-expanded={menuItems.providers ? 'true' : 'false'}
+          aria-controls="collapseProviders"
+        >
+          <i className="fas fa-fw fa-folder"></i>
+          <span>Proveeduría</span>
+        </a>
+        <div
+          id="collapseSupport"
+          className={`collapse ${menuItems.providers ? 'show' : ''}`}
+          aria-labelledby="headingProviders"
+        >
+          <div className="bg-white py-2 collapse-inner rounded">
+            <a className="collapse-item" onClick={() => navigate('/proveedores')}>
+              Administrar Proveedores            </a>
+         
+            
+          </div>
+
+        </div>
+      </li>
+
+
+
+
       {/* Nav Item CLIENTES - Categorías Collapse Menu ************************/}
       <li className="nav-item">
         <a
@@ -96,17 +125,17 @@ const Sidebar = () => {
       <li className="nav-item">
         <a
           className="nav-link"
-          onClick={() => handleMenuToggle('providers')}
-          aria-expanded={menuItems.providers ? 'true' : 'false'}
-          aria-controls="collapseProviders"
+          onClick={() => handleMenuToggle('shipments')}
+          aria-expanded={menuItems.shipments ? 'true' : 'false'}
+          aria-controls="collapseShipments"
         >
           <i className="fas fa-fw fa-folder"></i>
           <span>Envios</span>
         </a>
         <div
-          id="collapseProviders"
-          className={`collapse ${menuItems.providers ? 'show' : ''}`}
-          aria-labelledby="headingProviders"
+          id="collapseShipments"
+          className={`collapse ${menuItems.shipments ? 'show' : ''}`}
+          aria-labelledby="headingShipments"
         >
           <div className="bg-white py-2 collapse-inner rounded">
             <a className="collapse-item" onClick={() => navigate('/envios')}>
@@ -146,6 +175,11 @@ const Sidebar = () => {
 
         </div>
       </li>
+
+    
+
+
+
 
     </ul>
   );

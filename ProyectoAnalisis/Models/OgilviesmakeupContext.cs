@@ -37,7 +37,7 @@ public partial class OgilviesmakeupContext : DbContext
 
     public virtual DbSet<Promocione> Promociones { get; set; }
 
-    public virtual DbSet<Proveedore> Proveedores { get; set; }
+    public virtual DbSet<Proveedores> Proveedores { get; set; }
 
     public virtual DbSet<Respuesta> Respuestas { get; set; }
 
@@ -345,7 +345,7 @@ public partial class OgilviesmakeupContext : DbContext
                 .HasColumnName("listaProductos");
         });
 
-        modelBuilder.Entity<Proveedore>(entity =>
+        modelBuilder.Entity<Proveedores>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__proveedo__3214EC071F872BBD");
 

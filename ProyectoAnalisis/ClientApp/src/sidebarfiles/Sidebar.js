@@ -9,6 +9,7 @@ const Sidebar = () => {
   const navigate = useNavigate()
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [menuItems, setMenuItems] = useState({
+    clients: false,
     categories: false,
     providers: false,
     products: false,
@@ -23,7 +24,7 @@ const Sidebar = () => {
   const handleMenuToggle = (menuItem) => {
     setMenuItems((prevMenuItems) => ({
       ...prevMenuItems,
-      [menuItem]: !prevMenuItems[menuItem],
+      [menuItem]: !prevMenuItems[menuItem], //muestra u oculta el Nav Menu correspondiente
     }));
   };
 
@@ -32,18 +33,41 @@ const Sidebar = () => {
 
   return (
     <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    {/* Sidebar - Brand */}
-    <a className="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-      <div className="sidebar-brand-icon rotate-n-15">
-        <i className="fas fa-laugh-wink"></i>
-      </div>
-      <div className="sidebar-brand-text mx-3">Ogilvie´s MakeUp</div>
-    </a>
+      {/* Sidebar - Brand */}
+      <a className="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div className="sidebar-brand-icon rotate-n-15">
+          <i className="fas fa-laugh-wink"></i>
+        </div>
+        <div className="sidebar-brand-text mx-3">Ogilvie´s MakeUp</div>
+      </a>
 
       {/* Divider */}
       <hr className="sidebar-divider my-0" />
 
-      {/* Nav Item - Categorías Collapse Menu */}
+      {/* Nav Item CLIENTES - Categorías Collapse Menu ************************/}
+      <li className="nav-item">
+        <a
+          className="nav-link"
+          onClick={() => handleMenuToggle('clients')} 
+          aria-expanded={menuItems.clients ? 'true' : 'false'}
+          aria-controls="collapseCategories"
+        >
+          <i className="fas fa-fw fa-folder"></i>
+          <span>Clientes</span>
+        </a>
+        <div
+          id="collapseCategories"
+          className={`collapse ${menuItems.clients ? 'show' : ''}`}
+          aria-labelledby="headingCategories"
+        >
+          <div className="bg-white py-2 collapse-inner rounded">
+            <a className="collapse-item" onClick={() => navigate('/clientes')}>
+              Administrar Clientes
+            </a>
+          </div>
+        </div>
+      </li>
+      {/* Nav Item PEDIDOS - Categorías Collapse Menu *****************************/}
       <li className="nav-item">
         <a
           className="nav-link"
@@ -68,7 +92,7 @@ const Sidebar = () => {
         </div>
       </li>
 
-      {/* Nav Item - Proveedores Collapse Menu */}
+      {/* Nav Item Envios - Proveedores Collapse Menu *************************************/}
       <li className="nav-item">
         <a
           className="nav-link"
@@ -94,8 +118,8 @@ const Sidebar = () => {
       </li>
 
 
-            {/* Nav Item - Proveedores Collapse Menu */}
-            <li className="nav-item">
+      {/* Nav Item Atencion al Cliente - Proveedores Collapse Menu *****************************/}
+      <li className="nav-item">
         <a
           className="nav-link"
           onClick={() => handleMenuToggle('support')}
@@ -119,12 +143,10 @@ const Sidebar = () => {
             </a>
             {/* ... (other items) */}
           </div>
-          
+
         </div>
       </li>
 
-      {/* Repeat similar code for other menu items */}
-    
     </ul>
   );
 };

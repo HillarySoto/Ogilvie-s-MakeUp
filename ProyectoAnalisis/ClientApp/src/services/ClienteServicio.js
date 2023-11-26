@@ -44,6 +44,7 @@ export const updateClient = async (id, client) => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar',
             allowOutsideClick: false
         });
 
@@ -83,6 +84,7 @@ export const eliminarCliente = async (id) => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar',
             allowOutsideClick: false
         });
 

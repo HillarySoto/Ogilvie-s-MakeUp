@@ -6,12 +6,12 @@ import { mostrarProveedores, guardarProveedor, editarProveedor, eliminarProveedo
 
 const ProveedorPage = () => {
   const [proveedores, setProveedores] = useState([]);
-  const [update, setUpdate] = useState(null); // Almacena el objeto proveedor que se va a editar
+  const [update, setUpdate] = useState(null); 
   const [showForm, setShowForm] = useState(false);
 
   // Consume el servicio mostrarProveedores
   const getProveedores = async () => {
-    const data = await mostrarProveedores(); // Llama al servicio
+    const data = await mostrarProveedores(); 
     setProveedores(data);
   };
 

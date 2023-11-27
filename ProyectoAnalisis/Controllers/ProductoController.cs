@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using ProyectoAnalisis.Models;
+﻿using ProyectoAnalisis.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,7 +42,7 @@ namespace OgilviesMakeUpProject.Controllers
         [HttpDelete("Eliminar/{id}")]
         public async Task<IActionResult> Eliminar(int id)
         {
-            Producto? producto = await _dbContext.Productos.FindAsync(id);
+        Producto producto = await _dbContext.Productos.FindAsync(id);
 
             if (producto == null)
             {

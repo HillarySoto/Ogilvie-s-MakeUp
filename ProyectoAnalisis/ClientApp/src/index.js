@@ -5,7 +5,6 @@ import FormularioEnvio from "./components/FormularioEnvio";
 import ProveedorPage from "./pages/ProveedorPage";
 import ProductoPage from "./pages/ProductoPage";
 import ListaPedidos from "./components/Pedidos";
-import Navbar from "./sidebarfiles/NavMenu";
 import ListaEnvios from "./components/Envios";
 import ModificarPedidoForm from "./components/FormularioPedido";
 import CrearConsultaForm from "./components/CrearConsultaForm";
@@ -14,6 +13,7 @@ import Sidebar from "./sidebarfiles/Sidebar";
 import EditarEnvio from "./components/EditarEnvio";
 import ClientsPage from "./pages/ClientsPage";
 import Pagos from "./pages/PaymentPage"
+import InventarioPage from "./pages/InventarioPage";
 //SBAdmin2 Style
 
 export default function App() {
@@ -26,7 +26,8 @@ export default function App() {
                         <Route index element={<ListaPedidos />} />
                     </Route>
                     <Route path="/productos" element={<ProductoPage/>}/>
-                    <Route path="/proveedores" element={<ProveedorPage/>}/>
+                    <Route path="/proveedores" element={<ProveedorPage />} />
+                    <Route path="/inventario" element={<InventarioPage />} />
                     <Route path="/clientes" element={<ClientsPage/>}/>
                     <Route path="/pedidos" element={<ListaPedidos />} />
                     <Route path="/envios" element={<ListaEnvios />} />

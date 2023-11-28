@@ -1,19 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ProyectoAnalisis.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace OgilviesMakeUpProject.Controllers
+
 {
-   /* [Route("api/[controller]")]
+   [Route("api/[controller]")]
     [ApiController]
     public class ProductoController : ControllerBase
     {
-        private readonly ProyectoAnalisisContext _dbContext;
+        private readonly OgilviesmakeupContext _dbContext;
 
-        public ProductoController(ProyectoAnalisisContext context)
+        public ProductoController(OgilviesmakeupContext context)
         {
             _dbContext = context;
         }
@@ -21,7 +19,7 @@ namespace OgilviesMakeUpProject.Controllers
         [HttpGet("Lista")]
         public async Task<ActionResult> Lista()
         {
-            List<Producto> lista = await _dbContext.Productos.OrderByDescending(p => p.Id).ToListAsync();
+            List<Producto> lista = await _dbContext.Productos.OrderByDescending(p => p.IdProducto).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, lista);
         }
 
@@ -44,7 +42,7 @@ namespace OgilviesMakeUpProject.Controllers
         [HttpDelete("Eliminar/{id}")]
         public async Task<IActionResult> Eliminar(int id)
         {
-            Producto producto = await _dbContext.Productos.FindAsync(id);
+        Producto producto = await _dbContext.Productos.FindAsync(id);
 
             if (producto == null)
             {
@@ -55,5 +53,5 @@ namespace OgilviesMakeUpProject.Controllers
             await _dbContext.SaveChangesAsync();
             return StatusCode(StatusCodes.Status200OK, "ok");
         }
-    }*/
+    }
 }

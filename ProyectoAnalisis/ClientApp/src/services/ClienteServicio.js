@@ -31,7 +31,8 @@ export const saveClient = async (client) => {
     })
 
     if (response.ok) {
-        mostrarClientes();
+        //mostrarClientes();
+        
     }
 }
 
@@ -82,9 +83,9 @@ export const eliminarCliente = async (id) => {
             title: 'Eliminar Cliente?',
             icon: 'warning',
             showCancelButton: true,
+            cancelButtonText: 'Cancelar',
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            cancelButtonText: 'Cancelar',
             allowOutsideClick: false
         });
 
@@ -96,7 +97,7 @@ export const eliminarCliente = async (id) => {
             if (response.ok) {
                 return true;
             } else {
-                console.error("error al eliminar cliente");
+                console.error("error al eliminar cliente", response);
                 return false;
             }
         } else {

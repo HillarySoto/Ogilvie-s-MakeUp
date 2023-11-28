@@ -13,15 +13,24 @@ const TablaClientes = ({ data, setUpdate, showForm, setShowForm, deleteClient })
 
     return (
         <div className="justify-content-center row">
+            <div className="mb-3">
+                <input width="40"
+                    type="text"
+                    placeholder="Hacer busqueda"
+                    className="form-control"
+                    value={''}                    
+                    //onChange={}
+                />
+            </div>
             <div>
                 <Table className="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>Cedula</th>
+                            <th>Cédula</th>
                             <th>Nombre</th>
-                            <th>Telefono</th>
-                            <th>Email</th>
-                            <th>Direccion</th>
+                            <th>Teléfono</th>
+                            <th>Correo Electronico</th>
+                            <th>Dirección</th>
                             <th>Fecha de registro</th>
                             <th></th>
                         </tr>
@@ -30,7 +39,7 @@ const TablaClientes = ({ data, setUpdate, showForm, setShowForm, deleteClient })
                         {
                             (data.length < 1) ? (
                                 <tr>
-                                    <td colSpan="6">Sin registros</td>
+                                    <td colSpan="7">Sin registros</td>
                                 </tr>
                             ) : (
                                 data.map((item) => (

@@ -2,7 +2,7 @@
 //validar letras
 export const validarLetra = (value) => {
 
-  if (/^(?=.*[a-zA-ZáéíóúÁÉÍÓÚ])\s*[a-zA-ZáéíóúÁÉÍÓÚ\s]*$/.test(value)) {
+  if (/^(?=.*[a-zA-ZáéíóúÁÉÍÓÚñÑ])\s*[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(value)) {
 
     return true;
 

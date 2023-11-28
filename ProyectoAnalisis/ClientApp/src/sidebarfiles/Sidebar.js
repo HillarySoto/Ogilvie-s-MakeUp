@@ -1,6 +1,7 @@
 // Sidebar.js
 
 import "./css/styles.css"
+import "../styles/css/custom.css"
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,7 @@ const Sidebar = () => {
     returns: false,
     promotions: false,
     support: false,
+    payments: false
   });
 
   const handleMenuToggle = (menuItem) => {
@@ -89,8 +91,8 @@ const Sidebar = () => {
           <div className="bg-white py-2 collapse-inner rounded">
             <a className="collapse-item" onClick={() => navigate('/proveedores')}>
               Administrar Proveedores            </a>
-         
-            
+
+
           </div>
 
         </div>
@@ -103,7 +105,7 @@ const Sidebar = () => {
       <li className="nav-item">
         <a
           className="nav-link"
-          onClick={() => handleMenuToggle('clients')} 
+          onClick={() => handleMenuToggle('clients')}
           aria-expanded={menuItems.clients ? 'true' : 'false'}
           aria-controls="collapseCategories"
         >
@@ -139,7 +141,7 @@ const Sidebar = () => {
           aria-labelledby="headingCategories"
         >
           <div className="bg-white py-2 collapse-inner rounded">
-            <a className="collapse-item" onClick={() => navigate('/')}>
+            <a className="collapse-item" onClick={() => navigate('/principal')}> {/*lista pedidos es la ruta vistaprincipal*/}
               Lista pedidos
             </a>
             {/* ... (other items) */}
@@ -202,7 +204,31 @@ const Sidebar = () => {
         </div>
       </li>
 
-    
+      {/* Nav Item Atencion al Cliente - Proveedores Collapse Menu *****************************/}
+      <li className="nav-item">
+        <a
+          className="nav-link"
+          onClick={() => handleMenuToggle('payments')}
+          aria-expanded={menuItems.payments ? 'true' : 'false'}
+          aria-controls="collapseProviders"
+        >
+          <i className="fas fa-fw fa-folder"></i>
+          <span>Registro de Pagos</span>
+        </a>
+        <div
+          id="collapseSupport"
+          className={`collapse ${menuItems.payments ? 'show' : ''}`}
+          aria-labelledby="headingSupports"
+        >
+          <div className="bg-white py-2 collapse-inner rounded">
+            <a className="collapse-item" onClick={() => navigate('/pagos')}>
+              Administrar Pagos
+            </a>
+          </div>
+
+        </div>
+      </li>
+
 
 
 

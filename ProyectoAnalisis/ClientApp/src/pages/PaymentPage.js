@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Container, Row, Col } from 'reactstrap'
-import FormularioPago from '../components/FormularioPago'
-import {savePayment} from '../services/PagoServicio'
+import { Container, Row, Col, Button } from 'reactstrap'
+import TablaPagos from '../components/TablaPagos'
+import FormularioPago from "../components/FormularioPago";
+import { savePayment, deletePayment } from '../services/PagoServicio'
 
 function PaymentPage() {
 
@@ -9,17 +10,26 @@ function PaymentPage() {
 
   return (
     <Container>
-        <Row className='mt-5'>
-            <Col sm="12">
-              <div>
-                <FormularioPago
-                  savePayment={savePayment}
-                />
-              </div>
-            </Col>
-        </Row>
-    </Container>
+      <Row className='mt-5'>
+        <Col sm="12">
+          <div>
+            {
+              form ? (
+                <FormularioPago savePayment={savePayment} form = {form} setForm={setForm} />
+              ) : (
+                <>                  
+                  <TablaPagos
+                    deletePayment={deletePayment} form = {form} setForm={setForm}
+                  />
+                </>
+              )
+            }
+          </div>
+        </Col >
+      </Row >
+    </Container >
   )
-}
+};
+
 
 export default PaymentPage

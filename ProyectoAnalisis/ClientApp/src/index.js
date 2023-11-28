@@ -13,6 +13,7 @@ import ListaConsultas from "./components/ListaConsultas";
 import Sidebar from "./sidebarfiles/Sidebar";
 import EditarEnvio from "./components/EditarEnvio";
 import ClientsPage from "./pages/ClientsPage";
+import Pagos from "./pages/PaymentPage"
 //SBAdmin2 Style
 
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
                     <Route path="/consultas" element={<ListaConsultas />} />
                     <Route path="/formulario-pedido/:idPedido" element={<ModificarPedidoForm />} />
                     <Route path="/formulario-envio/:idPedido" element={<FormularioEnvio />} />
+                    <Route path="/pagos" element={<Pagos />} />
                 </Routes>
             </div>
         </BrowserRouter>

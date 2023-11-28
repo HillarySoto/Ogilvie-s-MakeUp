@@ -14,10 +14,21 @@ const pagoModel = {
     estado: ""
 }
 
-const FormularioPago = ({ savePayment }) => {
+const FormularioPago = ({ savePayment, form, setForm }) => {
 
     const navigate = useNavigate();
     const [pago, setPago] = useState(pagoModel);
+
+    //envio de la data
+    const sendData = () => {
+
+        if (pago.id === 0) {
+            savePayment(pago);
+            setForm(!form);
+        } else {
+          //  updClient(client);
+        }
+    }
 
     //modificacion de los atributos del modelo de pago (pagoModel)
     const updateModel = (ev) => {
@@ -26,6 +37,8 @@ const FormularioPago = ({ savePayment }) => {
             [ev.target.name]: ev.target.value
         });
     }
+
+
 
     return (
         <div className="justify-content-center row">
@@ -100,7 +113,7 @@ const FormularioPago = ({ savePayment }) => {
                                     </FormGroup>
                                 </>
                             )}
-                            <Button color="secondary">
+                            <Button color="secondary" onClick={() => setForm(!form)}>
                                 Cancelar/Anular
                             </Button>{' '}
                             <Button color="primary" onClick={() => {
@@ -110,13 +123,15 @@ const FormularioPago = ({ savePayment }) => {
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Entrada(s) invalida(s)',
+                                        cancelButtonText: 'Cancelar',
                                         text: 'Hay campos vacios o entradas invalidas, por favor verifique!',
                                         allowOutsideClick: false
                                     })
                                 } else {
                                     pago.estado = "Pagado"
-                                    savePayment(pago);
-                                    navigate("/listapagos");
+                                    sendData();
+                                    setForm(!form);
+                                   // navigate("/listapagos");
                                 }
                             }}>
                                 Enviar Pago

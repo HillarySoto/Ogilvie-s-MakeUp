@@ -70,7 +70,34 @@ const Sidebar = () => {
           </div>
 
         </div>
-      </li>
+          </li>
+
+
+
+          {/* Nav Item Inventario - Categorías Collapse Menu ************************/}
+          <li className="nav-item">
+              <a
+                  className="nav-link"
+                  onClick={() => handleMenuToggle('inventory')}
+                  aria-expanded={menuItems.inventory ? 'true' : 'false'}
+                  aria-controls="collapseCategories"
+              >
+                  <i className="fas fa-fw fa-folder"></i>
+                  <span>Inventario</span>
+              </a>
+              <div
+                  id="collapseCategories"
+                  className={`collapse ${menuItems.inventory ? 'show' : ''}`}
+                  aria-labelledby="headingCategories"
+              >
+                  <div className="bg-white py-2 collapse-inner rounded">
+                      <a className="collapse-item" onClick={() => navigate('/inventario')}>
+                          Administrar Inventario
+                      </a>
+                  </div>
+              </div>
+          </li>
+
 
       {/* Nav Item Proveedores - Proveedores Collapse Menu *****************************/}
       <li className="nav-item">

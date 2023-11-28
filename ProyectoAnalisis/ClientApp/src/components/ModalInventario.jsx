@@ -1,107 +1,100 @@
-﻿import { useEffect, useState } from "react"
-import { Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, ModalFooter, Button } from "reactstrap"
+﻿import { useEffect, useState } from "react";
+import { Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, ModalFooter, Button } from "reactstrap";
 import ReactDatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'; // Estilos CSS de react-datepicker
-
-
+import 'react-datepicker/dist/react-datepicker.css';
 
 const modeloInventario = {
-    idInventario: 0,
-    producto: "",
-    nombre: "",
+    id: 0,
+    idProducto: 0,
     descripcion: "",
     cantidad: "",
     fechaRegistro: null,
     fechaCaduca: null,
-    estado: null
+    estado: null,
+    IdNavigation: null
+
 }
 
-
-const ModalInventario = ({ mostrarModal, setMostrarModal, guardarInventario, editar, setEditar, editarInventario }) => { // logica para crear un modal con un forms
-
+const ModalInventario = ({ mostrarModal, setMostrarModal, guardarInventario, editar, setEditar, editarInventario }) => {
     const [inventario, setInventario] = useState(modeloInventario);
 
     const actualizarDato = (e) => {
-        const { name, value } = e.target;
-
-        if (name === "cantidad" && !/^\d+$/.test(value)) {
-            // Si el campo es cantidad y no contiene solo números
-            return; // No actualizamos el estado
-        }
-
-        if (["producto", "nombre", "descripcion"].includes(name) && /[^a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]/.test(value)) {
-            // Si el campo es producto, nombre o descripcion, y contiene caracteres que no son letras ni espacios ni tildes
-            return; // No actualizamos el estado
-        }
-
         setInventario({
             ...inventario,
-            [name]: value
+            [e.target.name]: e.target.value || '' // Establecer un valor predeterminado si es null o undefined
         });
-    };
+    }
 
 
-
-    const enviarDatos = () => { // logica para enviar los datos al SQL
-
+    const enviarDatos = async () => {
         const estado = inventario.estado === "true" ? true : false;
         inventario.estado = estado;
 
         const fechaRegistroFormateada = inventario.fechaRegistro
             ? inventario.fechaRegistro.toISOString().split("T")[0]
             : null;
-        const fechaCaducidadFormateada = inventario.fechaCaducidad
-            ? inventario.fechaCaducidad.toISOString().split("T")[0]
+        const fechaCaducidadFormateada = inventario.fechaCaduca
+            ? inventario.fechaCaduca.toISOString().split("T")[0]
             : null;
 
+        try {
 
-        inventario.fechaRegistro = fechaRegistroFormateada;
-        inventario.fechaCaducidad = fechaCaducidadFormateada;
-  
+            const datosAEnviar = {
+                id: inventario.id,
+                idProducto: inventario.idProducto,
+                descripcion: inventario.descripcion,
+                cantidad: inventario.cantidad,
+                fechaRegistro: fechaRegistroFormateada,
+                fechaCaduca: fechaCaducidadFormateada,
+                estado: inventario.estado,
+                IdNavigation: inventario.objeto
+            };
 
-        if (inventario.idInventario === 0) {
-            guardarInventario(inventario);
-        } else {
-            editarInventario(inventario)
+            if (inventario.id === 0) {
+                guardarInventario(datosAEnviar);
+            } else {
+                editarInventario(datosAEnviar);
+            }
+
+            setInventario(modeloInventario);
+        } catch (error) {
+            console.error('Error al buscar el producto:', error);
         }
-
-        setInventario(modeloInventario)
-    }
+    };
 
 
-
-    useEffect(() => {  // para editar
-        if (editar != null) {
-            setInventario(editar)
+    useEffect(() => {
+        if (editar !== null) {
+            setInventario(editar);
         } else {
-            setInventario(modeloInventario)
+            setInventario(modeloInventario);
         }
-    }, [editar])
-
-
+    }, [editar]);
 
     const cerrarModal = () => {
-        setMostrarModal(!mostrarModal)
-        setEditar= null
+        setMostrarModal(!mostrarModal);
+        setEditar(null);
     }
 
-
     return (
-
         <Modal isOpen={mostrarModal}>
             <ModalHeader>
-                {inventario.idInventario === 0 ? "Nuevo Inventario" : "Editar Inventario"}
+                {inventario.id === 0 ? "Nuevo Inventario" : "Editar Inventario"}
             </ModalHeader>
-
             <ModalBody>
                 <Form>
                     <FormGroup>
-                        <Label>Producto</Label>
-                        <Input name="producto" onChange={(e) => actualizarDato(e)} value={inventario.producto} />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>Nombre</Label>
-                        <Input name="nombre" onChange={(e) => actualizarDato(e)} value={inventario.nombre} />
+                        <Label>ID Producto</Label>
+                        <Input
+                            name="idProducto"
+                            onChange={(e) => actualizarDato({
+                                target: {
+                                    name: 'idProducto',
+                                    value: parseInt(e.target.value, 10) // Convertir a entero
+                                }
+                            })}
+                            value={inventario.idProducto}
+                        />
                     </FormGroup>
                     <FormGroup>
                         <Label>Descripción</Label>
@@ -109,35 +102,43 @@ const ModalInventario = ({ mostrarModal, setMostrarModal, guardarInventario, edi
                     </FormGroup>
                     <FormGroup>
                         <Label>Cantidad</Label>
-                        <Input name="cantidad" onChange={(e) => actualizarDato(e)} value={inventario.cantidad} />
+                        <Input
+                            name="cantidad"
+                            onChange={(e) => actualizarDato({
+                                target: {
+                                    name: 'cantidad',
+                                    value: parseInt(e.target.value, 10) // Convertir a entero
+                                }
+                            })}
+                            value={inventario.cantidad}
+                        />
                     </FormGroup>
+
                     <FormGroup>
                         <Label>Fecha Registro</Label>
                         <ReactDatePicker
                             name="fechaRegistro"
                             selected={inventario.fechaRegistro}
                             onChange={(date) => actualizarDato({ target: { name: 'fechaRegistro', value: date } })}
-                            dateFormat="yyyy-MM-dd" // Puedes personalizar el formato de la fecha
+                            dateFormat="yyyy-MM-dd"
                         />
                     </FormGroup>
-
                     <FormGroup>
                         <Label>Fecha Caducidad</Label>
                         <ReactDatePicker
                             name="fechaCaduca"
                             selected={inventario.fechaCaduca}
                             onChange={(date) => actualizarDato({ target: { name: 'fechaCaduca', value: date } })}
-                            dateFormat="yyyy-MM-dd" 
+                            dateFormat="yyyy-MM-dd"
                         />
                     </FormGroup>
-
                     <FormGroup>
                         <Label>Estado</Label>
                         <Input
                             type="select"
                             name="estado"
                             onChange={(e) => actualizarDato(e)}
-                            value={inventario.estado ? "true" : "false"} // Convierte el valor booleano a cadena
+                            value={inventario.estado ? "true" : "false"}
                         >
                             <option value="true">En existencia</option>
                             <option value="false">Acabado</option>
@@ -145,14 +146,12 @@ const ModalInventario = ({ mostrarModal, setMostrarModal, guardarInventario, edi
                     </FormGroup>
                 </Form>
             </ModalBody>
-
-            <ModalFooter> 
-                <Button color="primary" size="sm" onClick={enviarDatos }>Guardar</Button> 
-                <Button color="danger" size="sm" onClick={cerrarModal } >Cerrar</Button>
+            <ModalFooter>
+                <Button color="primary" size="sm" onClick={enviarDatos}>Guardar</Button>
+                <Button color="danger" size="sm" onClick={cerrarModal}>Cerrar</Button>
             </ModalFooter>
         </Modal>
-    )
-
+    );
 }
 
 export default ModalInventario;

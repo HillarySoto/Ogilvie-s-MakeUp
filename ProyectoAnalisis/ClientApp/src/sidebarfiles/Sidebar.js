@@ -1,6 +1,7 @@
 // Sidebar.js
 
 import "./css/styles.css"
+import "../styles/css/custom.css"
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useNavigate } from "react-router-dom";
@@ -113,7 +114,7 @@ const Sidebar = () => {
           aria-labelledby="headingCategories"
         >
           <div className="bg-white py-2 collapse-inner rounded">
-            <a className="collapse-item" onClick={() => navigate('/')}>
+            <a className="collapse-item" onClick={() => navigate('/principal')}> {/*lista pedidos es la ruta vistaprincipal*/}
               Lista pedidos
             </a>
             {/* ... (other items) */}

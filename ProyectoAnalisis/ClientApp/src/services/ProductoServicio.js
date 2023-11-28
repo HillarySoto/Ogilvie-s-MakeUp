@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 
 export const mostrarProductos = async () => {
   try {
-    const data = await fetch("/api/producto/lista");
+    const data = await fetch("/api/Producto/Lista");
     return data.json();
   } catch (error) {
     console.error("Error al obtener la lista de productos:", error);
@@ -12,7 +12,7 @@ export const mostrarProductos = async () => {
 
 export const guardarProducto = async (producto, setMostrarModalProducto) => {
   try {
-    await fetch("api/producto/Guardar", {
+    await fetch("api/Producto/Guardar", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -42,7 +42,7 @@ export const editarProducto = async (producto, setMostrarModalProducto) => {
     });
 
     if (result.isConfirmed) {
-      await fetch("api/producto/Editar", {
+      await fetch("api/Producto/Editar", {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -73,7 +73,7 @@ export const eliminarProducto = async (id) => {
 
   if (respuesta.isConfirmed) {
     try {
-      await fetch(`api/producto/Eliminar/${id}`, {
+      await fetch(`api/Producto/Eliminar/${id}`, {
         method: 'DELETE',
       });
     } catch (error) {

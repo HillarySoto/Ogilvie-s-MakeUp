@@ -44,6 +44,32 @@ const Sidebar = () => {
       {/* Divider */}
       <hr className="sidebar-divider my-0" />
 
+            {/* Nav Item Productos - Productos Collapse Menu *****************************/}
+            <li className="nav-item">
+        <a
+          className="nav-link"
+          onClick={() => handleMenuToggle('products')}
+          aria-expanded={menuItems.products ? 'true' : 'false'}
+          aria-controls="collapseProducts"
+        >
+          <i className="fas fa-fw fa-folder"></i>
+          <span>Productos</span>
+        </a>
+        <div
+          id="collapseSupport"
+          className={`collapse ${menuItems.products ? 'show' : ''}`}
+          aria-labelledby="headingProducts"
+        >
+          <div className="bg-white py-2 collapse-inner rounded">
+            <a className="collapse-item" onClick={() => navigate('/productos')}>
+              Administrar Productos            </a>
+         
+            
+          </div>
+
+        </div>
+      </li>
+
       {/* Nav Item Proveedores - Proveedores Collapse Menu *****************************/}
       <li className="nav-item">
         <a

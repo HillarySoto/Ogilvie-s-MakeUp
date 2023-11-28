@@ -1,0 +1,91 @@
+title Crear Inventario
+
+Admin-> Inventario: 1 selecciona crear inventario
+Inventario-> Fromulario: 2 levanta el formulario
+Fromulario-> Fromulario: 3 carga info productos
+Admin->Fromulario :   4 llena los campos del formulario
+Admin->Fromulario :   5 selecciona opcion "crear"
+Fromulario-> Sistema : 6 mensaje de confirmar
+Admin-> Sistema : 7 confirma creacion
+Sistema-> Inventario : 8 guarda el inventario
+Admin-> Inventario: 9 ven los cambios
+
+
+title Crear Pedido
+
+Cliente-> Carrito: 1 selecciona crear pedido
+Carrito-> Pedido: 2 levanta el formulario
+Carrito-> Detalles: 3 actualiza informacion
+Pedido-> Pedido: 4 carga info productos
+Cliente->Pedido : 5 llena los campos del formulario
+Pedido-> Pedido: 6 calculos de totales
+Cliente->Pedido :   7 selecciona opcion "crear"
+Pedido-> Sistema : 8 mensaje de confirmar
+Admin-> Sistema : 9 confirma creacion
+Sistema-> Pedido : 10 crea el pedido
+Cliente-> Carrito: 12 ven los cambios
+
+title Ver detalles pedido
+
+Cliente-> Pedido: 1 selecciona ver pedidos
+Pedido-> GUI: 2 carga informacion
+Cliente-> Detalles: 3 selecciona ver detalles
+Detalles-> GUI: 4 carga informacion
+
+
+
+title Eliminar pedido
+
+Cliente-> Pedido: 1 selecciona ver pedidos
+Pedido-> GUI: 2 carga informacion
+Cliente-> GUI: 3 selecciona eliminar pedido
+GUI-> Sistema: 4 mensaje de confirmacion
+Cliente-> Sistema: 5 Confirma eliminar
+Sistema-> Pedido: 6 se elimina la entrada
+Cliente-> Pedido: 7 ve lista actualizada
+
+
+
+
+title Ver Inventario
+
+Admin-> Inventario: 1 selecciona ver inventario
+Inventario-> GUI: 2 carga informacion
+Admin-> GUI: 3 ve la lista de inventario
+
+
+title Eliminar Inventario
+
+Admin-> Inventario: 1 selecciona eliminar inventario
+Inventario-> Sistema: 2 aviso de confirmacion
+Admin-> Sistema: 3 confirma eliminacion
+Sistema-> Inventario: 4 elimina el inventario
+Admin-> Inventario: 5 se actualiza la informacion
+
+
+
+title Modificar Inventario
+
+Admin-> Inventario: 1 selecciona Modificar inventario
+Inventario-> GUI: 2 Levanta formulario modificaión
+Inventario-> GUI: 3 carga la información del objeto
+Admin-> GUI: 4 modifica la informacion
+Admin-> GUI: 5 preciona opcion de actualizar
+GUI-> Sistema: 6 mensaje de confirmación
+Admin-> Sistema: 7 confirma la modificación
+Sistema-> Inventario: 8 realiza la modificacion
+Sistema-> Inventario: 9 actualiza la informacion
+
+
+title Modificar Pedido
+
+Cliente-> Pedido: 1 selecciona Modificar Pedido
+Pedido-> GUI: 2 Levanta formulario modificaión
+Pedido-> Detalles: 3 carga la información del Pedido
+Cliente-> Detalles: 4 modifica la informacion
+Cliente-> Detalles: 5 preciona opcion de actualizar
+Detalles-> Sistema: 6 mensaje de confirmación
+Cliente-> Sistema: 7 confirma la modificación
+Pedido-> Pedido: 8 realiza calculos de totales 
+Sistema-> Pedido: 9 realiza la modificacion
+Pedido-> Cliente: 10 refresca la lista pedido

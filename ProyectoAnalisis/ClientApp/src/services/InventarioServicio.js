@@ -7,10 +7,11 @@ export const mostrarInventario = async () => { //para monstrar el inventario
     try {
         if (response.ok) {
             const data = await response.json();
+            console.log(data);
             return data; //listado de inventario
-
+            
         } else {
-            console.log("error al obtener la lista")
+            console.log("error al obtener la lista", response)
             return [];
         }
     } catch (error) {
@@ -42,7 +43,7 @@ try {
 export const editarInventario = async (inventario, setMostrarModalinventario) => {
 try {
     const result = await Swal.fire({
-        title: 'Actualizar Información?',
+        title: 'Actualizar Informaciï¿½n?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

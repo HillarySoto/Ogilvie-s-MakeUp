@@ -2,7 +2,12 @@ import Swal from "sweetalert2";
 
 export const mostrarClientes = async () => {
 
-    const response = await fetch("api/Clientes");/* ver ruta del controlador */
+    const token = localStorage.getItem('token');
+    
+    const response = await fetch("api/Clientes", { /* ver ruta del controlador */
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }});
 
     try {
         if (response.ok) {

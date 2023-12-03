@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { BrowserRouter } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import Login from "./components/Login";
 import AdminDashboard from './components/AdminDashboard';
@@ -20,7 +21,7 @@ export default function App() {
         const token = localStorage.getItem('token'); //obtener token
 
         //obtner datos del token para el usuario
-        if (token) { 
+        if (token) {
             const decoded = jwtDecode(token);
 
             setUser({
@@ -29,16 +30,17 @@ export default function App() {
                 rol: decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
             });
 
-            console.log(decoded);
         }
         setIsAuthenticated(true);
 
     };
 
-    const handleLogout = () => {
+    const logout = () => {
 
-        // Una vez cerrada la sesión, actualiza el estado
+        localStorage.removeItem('token');
+        setUser(null);
         setIsAuthenticated(false);
+
     };
 
     //retorno de renderizacion de componentes
@@ -48,15 +50,20 @@ export default function App() {
                 <div>
                     {user.rol === "Admin" ? (
                         <div >
-                            <AdminDashboard user={user}/>
+                            <AdminDashboard user={user} logout={logout} />
                         </div>
                     ) : (
-                        <ClientDashboard user={user}/>
+                        <ClientDashboard user={user} logout={logout} />
                     )}
 
                 </div>
             ) : (
-                <Login onLogin={isLogin} />
+
+                <Routes>
+                    <Route path="/" element={<Login onLogin={isLogin} />} >
+                    </Route>
+                </Routes>
+
             )}
         </BrowserRouter>
     );

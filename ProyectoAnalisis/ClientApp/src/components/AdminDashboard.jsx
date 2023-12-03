@@ -1,6 +1,5 @@
 import React from 'react'
 import { Routes, Route } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import FormularioEnvio from "./FormularioEnvio";
 import ProveedorPage from "../pages/ProveedorPage";
 import ProductoPage from "../pages/ProductoPage";
@@ -15,10 +14,10 @@ import ClientsPage from "../pages/ClientsPage";
 import Pagos from "../pages/PaymentPage"
 import InventarioPage from "../pages/InventarioPage";
 
-function AdminDashboard({user}) {
+function AdminDashboard({user, logout}) {
     return (
         <div style={{ display: 'flex' }}>
-            <Sidebar rol={user.rol} />
+            <Sidebar rol={user.rol} logout={logout} />
             <Routes>
                 <Route path="/info" element={<ListaPedidos />}>
                     <Route index element={<ListaPedidos />} />

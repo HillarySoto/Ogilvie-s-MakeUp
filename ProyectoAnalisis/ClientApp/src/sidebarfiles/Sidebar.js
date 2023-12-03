@@ -6,9 +6,10 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useNavigate } from "react-router-dom";
 
-const Sidebar = ({ rol }) => {
-  const navigate = useNavigate()
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+const Sidebar = ({ rol, logout}) => {
+
+  const navigate = useNavigate();
+  const [style, setStyle] = useState("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
   const [menuItems, setMenuItems] = useState({
     clients: false,
     categories: false, //--> categories lo estan usando en el item pedidos ¿por qué?
@@ -24,6 +25,16 @@ const Sidebar = ({ rol }) => {
     categorias: false
   });
 
+  //despliega o reduce el sidebar
+  const changeStyle = () => {
+    if (style == "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion") {
+      setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled");
+    }
+    else {
+      setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion")
+    }
+  }
+
   const handleMenuToggle = (menuItem) => {
     setMenuItems((prevMenuItems) => ({
       ...prevMenuItems,
@@ -35,7 +46,7 @@ const Sidebar = ({ rol }) => {
 
 
   return (
-    <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul className={style} id="accordionSidebar">
       {/* Sidebar - Brand */}
       <a className="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div className="sidebar-brand-icon rotate-n-15">
@@ -46,6 +57,15 @@ const Sidebar = ({ rol }) => {
 
       {/* Divider */}
       <hr className="sidebar-divider my-0" />
+      <li className="nav-item">
+        <a className="nav-link" onClick={() => {
+          logout();
+          navigate("/");
+        }}>
+          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+          Cerrar Sesión
+        </a>
+      </li>
 
       {/* Nav Item Productos - Productos Collapse Menu *****************************/}
       {rol === "Admin" && (
@@ -272,36 +292,40 @@ const Sidebar = ({ rol }) => {
 
       )}
 
-      {rol==="Cliente" && (
-         <li className="nav-item">
-         <a
-           className="nav-link"
-           onClick={() => handleMenuToggle('categorias')}
-           aria-expanded={menuItems.categorias ? 'true' : 'false'}
-           aria-controls="collapseCategorias"
-         >
-           <i className="fas fa-fw fa-folder"></i>
-           <span>Categorias</span>
-         </a>
-         <div
-           id="collapseSupport"
-           className={`collapse ${menuItems.categorias ? 'show' : ''}`}
-           aria-labelledby="headingSupports"
-         >
-           <div className="bg-white py-2 collapse-inner rounded">
-             <a className="collapse-item" onClick={() => navigate('/vistaclientes')}> {/*añadir rutas de productos segun categorias*/}
-               Rostro
-             </a>
-             <a className="collapse-item" onClick={() => navigate('/#')}> {/*añadir rutas de productos segun categorias*/}
-               Cejas
-             </a>
-           </div>
+      {rol === "Cliente" && (
+        <li className="nav-item">
+          <a
+            className="nav-link"
+            onClick={() => handleMenuToggle('categorias')}
+            aria-expanded={menuItems.categorias ? 'true' : 'false'}
+            aria-controls="collapseCategorias"
+          >
+            <i className="fas fa-fw fa-folder"></i>
+            <span>Categorias</span>
+          </a>
+          <div
+            id="collapseSupport"
+            className={`collapse ${menuItems.categorias ? 'show' : ''}`}
+            aria-labelledby="headingSupports"
+          >
+            <div className="bg-white py-2 collapse-inner rounded">
+              <a className="collapse-item" onClick={() => navigate('/vistaclientes')}> {/*añadir rutas de productos segun categorias*/}
+                Rostro
+              </a>
+              <a className="collapse-item" onClick={() => navigate('/#')}> {/*añadir rutas de productos segun categorias*/}
+                Cejas
+              </a>
+            </div>
 
-         </div>
-       </li>
+          </div>
+        </li>
       )}
+      {/*ToggleButton */}
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle" onClick={changeStyle}></button>
+      </div>
     </ul>
   );
 };
 
-export default Sidebar;
+export default Sidebar

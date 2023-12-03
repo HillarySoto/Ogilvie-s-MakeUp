@@ -15,3 +15,9 @@ code {
 a{
   cursor: pointer;
 }
+
+.toggled {
+  overflow: visible;
+  width: 6.5rem!important;
+  transition: width 0.3s ease;
+}

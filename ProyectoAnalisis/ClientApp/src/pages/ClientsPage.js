@@ -37,7 +37,7 @@ const ClientsPage = () => {
     // Actualizar el estado de clients(lista de clientes)
     useEffect(() => {
         getClients();
-    }, [clients]);
+    }, []);
 
     return (
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -53,6 +53,7 @@ const ClientsPage = () => {
                                     update={update}
                                     setUpdate={setUpdate}
                                     updClient={updClient}
+                                    getClients = {getClients}
                                 />
                             ) : (
                                 <>

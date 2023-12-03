@@ -15,7 +15,7 @@ const clientModel = {
     contrasenia: ""
 }
 
-const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updClient }) => {
+const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updClient, getClients}) => {
 
     const [client, setClient] = useState(clientModel);
 
@@ -24,6 +24,7 @@ const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updC
 
         if (client.id === 0) {
             saveClient(client);
+            getClients();
             setShowForm(!showForm);
         } else {
             updClient(client);

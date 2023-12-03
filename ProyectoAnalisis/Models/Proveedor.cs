@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ProyectoAnalisis.Models;
 
-public partial class Proveedores
+public partial class Proveedor
 {
     public int Id { get; set; }
 
-    public string NombreEmpresa { get; set; } = null!;
+    public string? NombreEmpresa { get; set; }
 
     public string? Representante { get; set; }
 
@@ -16,4 +16,6 @@ public partial class Proveedores
     public string? Email { get; set; }
 
     public string? Direccion { get; set; }
+
+    public virtual ICollection<Producto> Productos { get; set; } = new List<Producto>();
 }

@@ -1,5 +1,4 @@
-﻿using ProyectoAnalisis.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace ProyectoAnalisis.Models;
@@ -20,5 +19,5 @@ public partial class Inventario
 
     public bool? Estado { get; set; }
 
-    public virtual Producto? IdNavigation { get; set; }
+    public virtual Producto? IdProductoNavigation { get; set; }
 }

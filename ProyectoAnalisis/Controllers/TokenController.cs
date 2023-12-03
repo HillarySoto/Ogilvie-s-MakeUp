@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using ProyectoAnalisis.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -21,14 +23,20 @@ namespace ProyectoAnalisis.Controllers
         }
 
         [HttpPost("iniciarSesion")]
-        public IActionResult IniciarSesion([FromBody] Cliente cliente)
+        public dynamic IniciarSesion([FromBody] Object obj)
         {
-            var usuario = _dbContext.Clientes
-                .FirstOrDefault(u => u.Email == cliente.Email && u.Contrasenia == cliente.Contrasenia);
+            var data = JsonConvert.DeserializeObject<dynamic>(obj.ToString());
+            string email = data.email.ToString();
+            string password = data.password.ToString();
+
+            var usuario = _dbContext.Usuarios
+                .Include(u => u.RolNavigation)
+                .FirstOrDefault(u => u.Email == email && u.Contrasenia == password);
 
 
             if (usuario == null)
             {
+                Console.WriteLine($"Intento de inicio de sesión fallido para {email}");
                 return Unauthorized();
             }
 
@@ -39,8 +47,9 @@ namespace ProyectoAnalisis.Controllers
                 new Claim(JwtRegisteredClaimNames.Sub, jwt.Subject),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                new Claim("id", cliente.Id.ToString()),
-                new Claim("correo", cliente.Email)
+                new Claim("id", usuario.Id.ToString()),
+                new Claim("correo", usuario.Email),
+                new Claim(ClaimTypes.Role, usuario.RolNavigation.Descripcion)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key)); //********
@@ -48,7 +57,7 @@ namespace ProyectoAnalisis.Controllers
             var token = new JwtSecurityToken(jwt.Issuer, jwt.Audience, claims, signingCredentials: signIn); //aca se puede configurar el tiempo que durara la sesion
 
 
-            return Ok(new { Token = token }); //***
+            return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(token) }); //***
         }
     }
 }

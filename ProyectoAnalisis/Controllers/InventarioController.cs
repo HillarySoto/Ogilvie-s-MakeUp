@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace ProyectoAnalisis.Controllers
 {
-    [Route("api/[controller]")]
+   /* [Route("api/[controller]")]
     [ApiController]
     public class InventarioController : ControllerBase
     {
@@ -42,7 +42,7 @@ namespace ProyectoAnalisis.Controllers
             return Ok(lista);
         }
 
-        /*
+        
         [HttpGet("Listar")]
         public async Task<ActionResult<IEnumerable<Inventario>>> Listar()
         {
@@ -54,7 +54,7 @@ namespace ProyectoAnalisis.Controllers
             return await _dbcontext.Inventarios.ToListAsync();
         }
 
-        */
+        
 
         [HttpPost("Guardar")]
         public async Task<IActionResult> Guardar([FromBody] Inventario request)
@@ -99,5 +99,5 @@ namespace ProyectoAnalisis.Controllers
 
 
 
-    }
+    }*/
 }

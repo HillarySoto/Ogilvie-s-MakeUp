@@ -5,7 +5,9 @@ namespace ProyectoAnalisis.Models;
 
 public partial class Producto
 {
-    public int IdProducto { get; set; }
+    public int Id { get; set; }
+
+    public int? IdProveedor { get; set; }
 
     public string? Nombre { get; set; }
 
@@ -13,13 +15,19 @@ public partial class Producto
 
     public int? Precio { get; set; }
 
+    public int? IdCategoria { get; set; }
+
+    public string? Subcategoria { get; set; }
+
     public string? Marca { get; set; }
 
-    public string? Categoria { get; set; }
+    public virtual ICollection<Carrito> Carritos { get; set; } = new List<Carrito>();
 
-    public virtual DetallePedido? DetallePedido { get; set; }
+    public virtual ICollection<DetallePedido> DetallePedidos { get; set; } = new List<DetallePedido>();
 
-    public virtual Inventario? Inventario { get; set; }
+    public virtual Categorium? IdCategoriaNavigation { get; set; }
 
-    public virtual ICollection<Pago> Pagos { get; set; } = new List<Pago>();
+    public virtual Proveedor? IdProveedorNavigation { get; set; }
+
+    public virtual ICollection<Inventario> Inventarios { get; set; } = new List<Inventario>();
 }

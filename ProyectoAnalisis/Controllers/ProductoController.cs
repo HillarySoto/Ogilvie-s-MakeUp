@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace OgilviesMakeUpProject.Controllers
 
 {
-  /* [Route("api/[controller]")]
+   [Route("api/[controller]")]
     [ApiController]
     public class ProductoController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace OgilviesMakeUpProject.Controllers
         [HttpGet("Lista")]
         public async Task<ActionResult> Lista()
         {
-            List<Producto> lista = await _dbContext.Productos.OrderByDescending(p => p.IdProducto).ToListAsync();
+            List<Producto> lista = await _dbContext.Productos.OrderByDescending(p => p.Id).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, lista);
         }
 
@@ -53,5 +53,5 @@ namespace OgilviesMakeUpProject.Controllers
             await _dbContext.SaveChangesAsync();
             return StatusCode(StatusCodes.Status200OK, "ok");
         }
-    }*/
+    }
 }

@@ -19,5 +19,5 @@ public partial class Inventario
 
     public bool? Estado { get; set; }
 
-    public virtual Producto IdNavigation { get; set; } = null!;
+    public virtual Producto? IdProductoNavigation { get; set; }
 }

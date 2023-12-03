@@ -4,7 +4,7 @@ import { getPayments } from "../services/PagoServicio";
 import { useEffect, useState } from "react";
 
 
-const TablaPagos = () => {
+const TablaPagos = ({ deletePayment, form, setForm }) => {
 
     const [pagos, setPagos] = useState([]);
 
@@ -24,10 +24,15 @@ const TablaPagos = () => {
                 <Col sm="12">
 
                     <div className="justify-content-center row">
-                        <div className="col-md-10">
+                        <div className="col-md-12">
                             <Card className="shadow p-3 mb-5 bg-body rounded">
                                 <CardHeader>
-                                    <h3>Registro de Pagos</h3>
+                                    <div className="d-flex justify-content-between mb-5">
+                                        <h3>Registro de Pagos</h3>
+                                        <Button size="sm-13" color="success"
+                                            onClick={() => setForm(!form)} 
+                                        >Realizar Pago</Button>
+                                    </div>
                                 </CardHeader>
                                 <CardBody>
                                     <Table class="table table-striped">
@@ -35,9 +40,9 @@ const TablaPagos = () => {
                                             <tr>
                                                 <th>Fecha de pago</th>
                                                 <th>Monto</th>
-                                                <th>Mètodo de Pago</th>
-                                                <th>Referencia</th>                                                
-                                                <th>Numero de Tarjeta</th>
+                                                <th>Método de Pago</th>
+                                                <th>Referencia</th>
+                                                <th>Número de Tarjeta</th>
                                                 <th>Estado del Pago</th>
                                                 <th></th>
                                             </tr>
@@ -57,8 +62,13 @@ const TablaPagos = () => {
                                                             <td>{item.metodoPago}</td>
                                                             <td>{item.referencia}</td>
                                                             <td>{item.numeroTarjeta}</td>
-                                                            <td>{item.estado}</td>                                                   
-
+                                                            <td>{item.estado}</td>
+                                                            <td>
+                                                                <Button size="sm" color="danger"
+                                                                    onClick={() => deletePayment(item.id)}
+                                                                > Eliminar
+                                                                </Button>
+                                                            </td>
                                                         </tr>
 
                                                     ))

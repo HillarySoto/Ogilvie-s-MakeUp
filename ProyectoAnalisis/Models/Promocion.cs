@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ProyectoAnalisis.Models;
 
-public partial class Promocione
+public partial class Promocion
 {
-    public int IdPromocion { get; set; }
+    public int Id { get; set; }
 
     public string? Descripcion { get; set; }
 
@@ -13,7 +13,7 @@ public partial class Promocione
 
     public DateTime? FechaFin { get; set; }
 
-    public int? Descuento { get; set; }
+    public decimal? Descuento { get; set; }
 
     public string? ListaProductos { get; set; }
 }

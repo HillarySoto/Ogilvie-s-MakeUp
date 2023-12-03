@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace OgilviesMakeUpProject.Controllers
 
 {
-   [Route("api/[controller]")]
+  /* [Route("api/[controller]")]
     [ApiController]
     public class ProductoController : ControllerBase
     {
@@ -53,5 +53,5 @@ namespace OgilviesMakeUpProject.Controllers
             await _dbContext.SaveChangesAsync();
             return StatusCode(StatusCodes.Status200OK, "ok");
         }
-    }
+    }*/
 }

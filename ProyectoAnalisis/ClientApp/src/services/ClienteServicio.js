@@ -2,7 +2,12 @@ import Swal from "sweetalert2";
 
 export const mostrarClientes = async () => {
 
-    const response = await fetch("api/Clientes");/* ver ruta del controlador */
+    const token = localStorage.getItem('token'); 
+
+    const response = await fetch("api/Usuarios", { /* añadir token al header de la solicitud */
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }});
 
     try {
         if (response.ok) {
@@ -10,7 +15,7 @@ export const mostrarClientes = async () => {
             return data; //lista de clientes
 
         } else {
-            console.log("error al obtener la lista")
+            console.log("error al obtener la lista",response)
             return [];
         }
     } catch (error) {
@@ -22,7 +27,7 @@ export const mostrarClientes = async () => {
 
 export const saveClient = async (client) => {
 
-    const response = await fetch("api/Clientes", {
+    const response = await fetch("api/Usuarios", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -31,7 +36,8 @@ export const saveClient = async (client) => {
     })
 
     if (response.ok) {
-        mostrarClientes();
+        //mostrarClientes();
+        
     }
 }
 
@@ -49,7 +55,7 @@ export const updateClient = async (id, client) => {
         });
 
         if (result.isConfirmed) {
-            const response = await fetch("api/Clientes/" + id, {
+            const response = await fetch("api/Usuarios/" + id, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
@@ -82,21 +88,21 @@ export const eliminarCliente = async (id) => {
             title: 'Eliminar Cliente?',
             icon: 'warning',
             showCancelButton: true,
+            cancelButtonText: 'Cancelar',
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            cancelButtonText: 'Cancelar',
             allowOutsideClick: false
         });
 
         if (result.isConfirmed) {
-            const response = await fetch("api/Clientes/" + id, { //llama a la api
+            const response = await fetch("api/Usuarios/" + id, { //llama a la api
                 method: 'DELETE',
             });
 
             if (response.ok) {
                 return true;
             } else {
-                console.error("error al eliminar cliente");
+                console.error("error al eliminar cliente", response);
                 return false;
             }
         } else {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ProyectoAnalisis.Models;
 
-public partial class Encuesta
+public partial class Encuestum
 {
-    public int IdEncuesta { get; set; }
+    public int Id { get; set; }
 
     public string? Apellidos { get; set; }
 
@@ -17,5 +17,5 @@ public partial class Encuesta
 
     public string? Nombre { get; set; }
 
-    public int? Telefono { get; set; }
+    public string? Telefono { get; set; }
 }

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 
 namespace ProyectoAnalisis.Models;
 
-public partial class Devolucione
+public partial class Devolucion
 {
-    public int IdDevolucion { get; set; }
+    public int Id { get; set; }
 
     public int? IdPedido { get; set; }
+
+    public int? IdCliente { get; set; }
 
     public DateTime? Fecha { get; set; }
 
@@ -15,7 +17,9 @@ public partial class Devolucione
 
     public string? Motivo { get; set; }
 
-    public int? Reembolso { get; set; }
-
     public string? Estado { get; set; }
+
+    public virtual Usuario? IdClienteNavigation { get; set; }
+
+    public virtual Pedido? IdPedidoNavigation { get; set; }
 }

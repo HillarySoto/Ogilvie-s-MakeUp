@@ -5,9 +5,9 @@ namespace ProyectoAnalisis.Models;
 
 public partial class Envio
 {
-    public int IdEnvio { get; set; }
+    public int Id { get; set; }
 
-    public int? IdProducto { get; set; }
+    public int? IdPedido { get; set; }
 
     public int? IdCliente { get; set; }
 
@@ -17,9 +17,13 @@ public partial class Envio
 
     public DateTime? FechaLlegada { get; set; }
 
-    public int? CostoEnvio { get; set; }
+    public decimal? CostoEnvio { get; set; }
 
     public string? CompañiaEnvio { get; set; }
 
-    public int? NumGuia { get; set; }
+    public string? NumGuia { get; set; }
+
+    public virtual Usuario? IdClienteNavigation { get; set; }
+
+    public virtual Pedido? IdPedidoNavigation { get; set; }
 }

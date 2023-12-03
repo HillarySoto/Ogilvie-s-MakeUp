@@ -15,7 +15,7 @@ const clientModel = {
     contrasenia: ""
 }
 
-const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updClient }) => {
+const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updClient, getClients}) => {
 
     const [client, setClient] = useState(clientModel);
 
@@ -24,6 +24,7 @@ const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updC
 
         if (client.id === 0) {
             saveClient(client);
+            getClients();
             setShowForm(!showForm);
         } else {
             updClient(client);
@@ -70,7 +71,7 @@ const Formulario = ({ showForm, setShowForm, saveClient, update, setUpdate, updC
                         <Form>
                             <FormGroup>
                                 <Label>Cédula</Label>
-                                <Input type="text" name="cedula" maxLength={9} onChange={(ev) => updateData(ev)} value={client.cedula} placeholder="Ingrese la cédula" />
+                                <Input  type="text" name="cedula" maxLength={9} onChange={(ev) => updateData(ev)} value={client.cedula} placeholder="Ingrese la cédula" />
                             </FormGroup>
                             <FormGroup>
                                 <Label>Nombre</Label>

@@ -325,11 +325,7 @@ public partial class OgilviesmakeupContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("nombre");
-            entity.Property(e => e.Precio).HasColumnName("precio");
-            entity.Property(e => e.Subcategoria)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("subcategoria");
+            entity.Property(e => e.Precio).HasColumnName("precio");         
 
             entity.HasOne(d => d.IdCategoriaNavigation).WithMany(p => p.Productos)
                 .HasForeignKey(d => d.IdCategoria)

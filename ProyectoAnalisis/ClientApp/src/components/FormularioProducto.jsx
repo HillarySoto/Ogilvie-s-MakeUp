@@ -25,7 +25,7 @@ const FormularioProducto = ({ mostrarModal, setMostrarModal, guardarProducto, ed
             .catch(error => console.error('Error al cargar proveedores:', error));
 
         // Lógica para cargar las categorías desde tu backend
-        fetch("/api/Categoria/ListaNombres")
+        fetch("/api/Categoria/Lista")
             .then(response => response.json())
             .then(data => setCategorias(data))
             .catch(error => console.error('Error al cargar categorías:', error));

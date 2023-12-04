@@ -2,25 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <base href="%PUBLIC_URL%/" />
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>ProyectoAnalisis</title>
+    <title>Ogilvie´s MakeUp</title>
+    <link rel="shortcut icon" href="https://www.flaticon.es/icono-gratis/maquillaje_1024580?term=makeup&page=1&position=1&origin=search&related_id=1024580">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
   </head>
   <body>
     <noscript>
@@ -28,14 +26,209 @@
     </noscript>
     <div id="root"></div>
     <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
+      Estructura del sidevar
     -->
+
+     <!-- Page Wrapper -->
+     <div id="wrapper">     
+        
+      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+          <!-- Sidebar - Brand -->
+          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+              <div class="sidebar-brand-icon rotate-n-15">
+                  <i class="fas fa-laugh-wink"></i>
+              </div>
+              <div class="sidebar-brand-text mx-3">Ogilvie´s MakeUp</div>
+          </a>
+      
+          <!-- Divider -->
+          <hr class="sidebar-divider my-0">
+      
+          <!-- Nav Item - Categorías Collapse Menu -->
+          <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>Categorías</span>
+              </a>
+              <div id="collapseCategories" class="collapse" aria-labelledby="headingCategories" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <a class="collapse-item" href="category1.html">Categoría 1</a>
+                      <a class="collapse-item" href="category2.html">Categoría 2</a>
+                      <a class="collapse-item" href="category3.html">Categoría 3</a>
+                  </div>
+              </div>
+          </li>
+      
+          <!-- Nav Item - Proveedores Collapse Menu -->
+          <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#collapseProviders" aria-expanded="false" aria-controls="collapseProviders">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>Proveedores</span>
+              </a>
+              <div id="collapseProviders" class="collapse" aria-labelledby="headingProviders" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <a class="collapse-item" href="add-provider.html">Agregar proveedor</a>
+                      <a class="collapse-item" href="modify-provider.html">Modificar Proveedor</a>
+                      <a class="collapse-item" href="list-providers.html">Ver lista de proveedores</a>
+                      <a class="collapse-item" href="delete-provider.html">Eliminar proveedor</a>
+                  </div>
+              </div>
+          </li>
+      
+          <!-- Nav Item - Producto Collapse Menu -->
+          <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>Producto</span>
+              </a>
+              <div id="collapseProducts" class="collapse" aria-labelledby="headingProducts" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <a class="collapse-item" href="add-product.html">Agregar producto</a>
+                      <a class="collapse-item" href="modify-product.html">Modificar Producto</a>
+                      <a class="collapse-item" href="list-products.html">Ver lista de productos</a>
+                      <a class="collapse-item" href="delete-product.html">Eliminar producto</a>
+                  </div>
+              </div>
+          </li>
+      
+          <!-- Nav Item - Inventario Collapse Menu -->
+          <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#collapseInventory" aria-expanded="false" aria-controls="collapseInventory">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>Inventario</span>
+              </a>
+              <div id="collapseInventory" class="collapse" aria-labelledby="headingInventory" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <a class="collapse-item" href="add-inventory.html">Agregar inventario</a>
+                      <a class="collapse-item" href="modify-inventory.html">Modificar Inventario</a>
+                      <a class="collapse-item" href="list-inventory.html">Ver inventario</a>
+                      <a class="collapse-item" href="delete-inventory.html">Eliminar inventario</a>
+                  </div>
+              </div>
+          </li>
+      
+          <!-- Nav Item - Pedidos Collapse Menu -->
+          <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#collapseOrders" aria-expanded="false" aria-controls="collapseOrders">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>Pedidos</span>
+              </a>
+              <div id="collapseOrders" class="collapse" aria-labelledby="headingOrders" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <a class="collapse-item" href="create-order.html">Crear pedido</a>
+                      <a class="collapse-item" href="manage-orders.html">Gestionar Pedidos</a>
+                      <a class="collapse-item" href="order-history.html">Historial de Pedidos</a>
+                  </div>
+              </div>
+          </li>
+      
+          <!-- Nav Item - Envíos Collapse Menu -->
+          <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#collapseShipments" aria-expanded="false" aria-controls="collapseShipments">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>Envíos</span>
+              </a>
+              <div id="collapseShipments" class="collapse" aria-labelledby="headingShipments" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <a class="collapse-item" href="ship-order.html">Enviar Pedido</a>
+                      <a class="collapse-item" href="track-shipments.html">Seguimiento de Envíos</a>
+                      <a class="collapse-item" href="shipment-history.html">Historial de Envíos</a>
+                  </div>
+              </div>
+          </li>
+      
+          <!-- Nav Item - Devoluciones Collapse Menu -->
+          <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#collapseReturns" aria-expanded="false" aria-controls="collapseReturns">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>Devoluciones</span>
+              </a>
+              <div id="collapseReturns" class="collapse" aria-labelledby="headingReturns" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <a class="collapse-item" href="initiate-return.html">Iniciar Devolución</a>
+                      <a class="collapse-item" href="manage-returns.html">Gestionar Devoluciones</a>
+                      <a class="collapse-item" href="return-history.html">Historial de Devoluciones</a>
+                  </div>
+              </div>
+          </li>
+      
+          <!-- Nav Item - Promociones Collapse Menu -->
+          <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#collapsePromotions" aria-expanded="false" aria-controls="collapsePromotions">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>Promociones</span>
+              </a>
+              <div id="collapsePromotions" class="collapse" aria-labelledby="headingPromotions" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <a class="collapse-item" href="create-promotion.html">Crear Promoción</a>
+                      <a class="collapse-item" href="manage-promotions.html">Gestionar Promociones</a>
+                      <a class="collapse-item" href="promotion-history.html">Historial de Promociones</a>
+                  </div>
+              </div>
+          </li>
+      
+          <!-- Nav Item - Atención Collapse Menu -->
+          <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#collapseSupport" aria-expanded="false" aria-controls="collapseSupport">
+                  <i class="fas fa-fw fa-folder"></i>
+                  <span>Atención</span>
+              </a>
+              <div id="collapseSupport" class="collapse" aria-labelledby="headingSupport" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <a class="collapse-item" href="contact-support.html">Contactar Soporte</a>
+                      <a class="collapse-item" href="faq.html">Preguntas Frecuentes</a>
+                  </div>
+              </div>
+          </li>
+      
+          <!-- Divider -->
+          <hr class="sidebar-divider d-none d-md-block">
+      
+          <!-- Sidebar Toggler (Sidebar) -->
+          <div class="text-center d-none d-md-inline">
+              <button class="rounded-circle border-0" id="sidebarToggle"></button>
+          </div>
+      
+      </ul>
+      
+
+
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+              <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
   </body>
 </html>

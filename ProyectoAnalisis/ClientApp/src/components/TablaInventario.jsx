@@ -11,7 +11,7 @@ function formatearFecha(fecha) {
     return `${dia}-${mes < 10 ? "0" : ""}${mes}-${anio}`;
 }
 
-const TablaInventario = ({ data, setEditar, mostrarModal, setMostrarModal, eliminarInventario, }) => {
+const TablaInventario = ({ data, setEditar, mostrarModal, setMostrarModal, eliminarInventario }) => {
 
 
     //PARA PAGINACIÓN
@@ -72,8 +72,8 @@ const TablaInventario = ({ data, setEditar, mostrarModal, setMostrarModal, elimi
                         </tr>
                     ) : (
                         console.log(data), // Asegúrate de que data tenga la estructura esperada
-                            currentItems.map((item, index) => (
-                                <tr key={item.id} className={getFilaColor(item.cantidad)}>
+                        currentItems.map((item, index) => (
+                            <tr key={item.id} className={getFilaColor(item.cantidad)}>
                                 <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
                                 <td>{item.nombreProducto}</td>
                                 <td>{item.marcaProducto}</td>
@@ -84,7 +84,7 @@ const TablaInventario = ({ data, setEditar, mostrarModal, setMostrarModal, elimi
                                 <td>{item.estado ? "En existencia" : "Acabado"}</td>
                                 <td>
                                     <Button color="primary" size="sm" className="me-2" onClick={() => enviarDatos(item)}> Editar </Button>
-                                    <Button color="danger" size="sm" onClick={() => eliminarInventario(item.Id)}> Eliminar </Button>
+                                    <Button color="danger" size="sm" onClick={() => eliminarInventario(item.id)}> Eliminar </Button>
                                 </td>
                             </tr>
                         ))

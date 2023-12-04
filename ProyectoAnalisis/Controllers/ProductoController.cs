@@ -16,12 +16,16 @@ namespace OgilviesMakeUpProject.Controllers
             _dbContext = context;
         }
 
+
+
         [HttpGet("Lista")]
         public async Task<ActionResult> Lista()
         {
             List<Producto> lista = await _dbContext.Productos.OrderByDescending(p => p.Id).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, lista);
         }
+
+
 
         [HttpPost("Guardar")]
         public async Task<IActionResult> Guardar([FromBody] Producto request)

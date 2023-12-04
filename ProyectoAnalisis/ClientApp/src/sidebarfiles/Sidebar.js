@@ -74,31 +74,29 @@ const Sidebar = ({ rol }) => {
       )}
 
 
-      {/* Nav Item Inventario - Categorías Collapse Menu ************************/}
-      {rol === "Admin" && (
-        <li className="nav-item">
-          <a
-            className="nav-link"
-            onClick={() => handleMenuToggle('inventory')}
-            aria-expanded={menuItems.inventory ? 'true' : 'false'}
-            aria-controls="collapseCategories"
-          >
-            <i className="fas fa-fw fa-folder"></i>
-            <span>Inventario</span>
-          </a>
-          <div
-            id="collapseCategories"
-            className={`collapse ${menuItems.inventory ? 'show' : ''}`}
-            aria-labelledby="headingCategories"
-          >
-            <div className="bg-white py-2 collapse-inner rounded">
-              <a className="collapse-item" onClick={() => navigate('/inventario')}>
-                Administrar Inventario
+          {/* Nav Item Inventario - Categorías Collapse Menu ************************/}
+          <li className="nav-item">
+              <a
+                  className="nav-link"
+                  onClick={() => handleMenuToggle('inventory')}
+                  aria-expanded={menuItems.inventory ? 'true' : 'false'}
+                  aria-controls="collapseCategories"
+              >
+                  <i className="fas fa-fw fa-folder"></i>
+                  <span>Inventario</span>
               </a>
-            </div>
-          </div>
-        </li>
-      )}
+              <div
+                  id="collapseCategories"
+                  className={`collapse ${menuItems.inventory ? 'show' : ''}`}
+                  aria-labelledby="headingCategories"
+              >
+                  <div className="bg-white py-2 collapse-inner rounded">
+                      <a className="collapse-item" onClick={() => navigate('/inventario')}>
+                          Administrar Inventario
+                      </a>
+                  </div>
+              </div>
+          </li>
 
 
       {/* Nav Item Proveedores - Proveedores Collapse Menu *****************************/}
@@ -156,33 +154,57 @@ const Sidebar = ({ rol }) => {
         </li>
       )}
 
-      {/* Nav Item PEDIDOS - PEDIDOS Collapse Menu *****************************/}
-      {rol === "Admin" && (
-        <li className="nav-item">
-          <a
-            className="nav-link"
-            onClick={() => handleMenuToggle('categories')}
-            aria-expanded={menuItems.categories ? 'true' : 'false'}
-            aria-controls="collapseCategories"
-          >
-            <i className="fas fa-fw fa-folder"></i>
-            <span>Pedidos</span>
-          </a>
-          <div
-            id="collapseCategories"
-            className={`collapse ${menuItems.categories ? 'show' : ''}`}
-            aria-labelledby="headingCategories"
-          >
-            <div className="bg-white py-2 collapse-inner rounded">
-              <a className="collapse-item" onClick={() => navigate('/pedidos')}>
-                Lista pedidos
+          {/* Nav Item Pedidos - Categorías Collapse Menu ************************/}
+          <li className="nav-item">
+              <a
+                  className="nav-link"
+                  onClick={() => handleMenuToggle('orders')}
+                  aria-expanded={menuItems.orders ? 'true' : 'false'}
+                  aria-controls="collapseCategories"
+              >
+                  <i className="fas fa-fw fa-folder"></i>
+                  <span>Pedidos</span>
               </a>
-              {/* ... (other items) */}
-            </div>
-          </div>
-        </li>
+              <div
+                  id="collapseCategories"
+                  className={`collapse ${menuItems.orders ? 'show' : ''}`}
+                  aria-labelledby="headingCategories"
+              >
+                  <div className="bg-white py-2 collapse-inner rounded">
+                      <a className="collapse-item" onClick={() => navigate('/pedido')}>
+                          Administrar Pedidos
+                      </a>
+                  </div>
+              </div>
+          </li>
 
-      )}
+
+
+          {/* Nav Item DetallesPedido - Categorías Collapse Menu ************************/}
+          <li className="nav-item">
+              <a
+                  className="nav-link"
+                  onClick={() => handleMenuToggle('details')}
+                  aria-expanded={menuItems.details ? 'true' : 'false'}
+                  aria-controls="collapseCategories"
+              >
+                  <i className="fas fa-fw fa-folder"></i>
+                  <span>Detalles Pedido</span>
+              </a>
+              <div
+                  id="collapseCategories"
+                  className={`collapse ${menuItems.details ? 'show' : ''}`}
+                  aria-labelledby="headingCategories"
+              >
+                  <div className="bg-white py-2 collapse-inner rounded">
+                      <a className="collapse-item" onClick={() => navigate('/detallesPedido')}>
+                          Administrar Detalles
+                      </a>
+                  </div>
+              </div>
+          </li>
+
+
 
       {/* Nav Item Envios - Proveedores Collapse Menu *************************************/}
       {rol === "Admin" && (

@@ -11,19 +11,38 @@ const modeloInventario = {
     fechaRegistro: null,
     fechaCaduca: null,
     estado: null,
-    IdNavigation: null
+    IdProductoNavigation: null
 
 }
 
-const ModalInventario = ({ mostrarModal, setMostrarModal, guardarInventario, editar, setEditar, editarInventario }) => {
+const ModalInventario = ({ mostrarModal, setMostrarModal, guardarInventario, editar, setEditar, editarInventario, listaProductos }) => {
+
+
     const [inventario, setInventario] = useState(modeloInventario);
 
+
+
+    const actualizarDato = (e) => {
+        const { name, value } = e.target;
+
+        setInventario((prevInventario) => ({
+            ...prevInventario,
+            [name]: value || '', // Establecer un valor predeterminado si es null o undefined
+        }));
+    };
+
+    /*
     const actualizarDato = (e) => {
         setInventario({
             ...inventario,
             [e.target.name]: e.target.value || '' // Establecer un valor predeterminado si es null o undefined
         });
     }
+
+*/
+
+
+
 
 
     const enviarDatos = async () => {
@@ -47,7 +66,7 @@ const ModalInventario = ({ mostrarModal, setMostrarModal, guardarInventario, edi
                 fechaRegistro: fechaRegistroFormateada,
                 fechaCaduca: fechaCaducidadFormateada,
                 estado: inventario.estado,
-                IdNavigation: inventario.objeto
+                IdProductoNavigation: inventario.IdProductoNavigation
             };
 
             if (inventario.id === 0) {
@@ -57,13 +76,22 @@ const ModalInventario = ({ mostrarModal, setMostrarModal, guardarInventario, edi
             }
 
             setInventario(modeloInventario);
+            setMostrarModal(false); // Cerrar el modal
+            setEditar(null);
         } catch (error) {
             console.error('Error al buscar el producto:', error);
         }
     };
 
 
+
+
+
+
     useEffect(() => {
+
+        console.log(listaProductos); // Asegúrate de que data tenga la estructura esperada
+
         if (editar !== null) {
             setInventario(editar);
         } else {
@@ -84,18 +112,21 @@ const ModalInventario = ({ mostrarModal, setMostrarModal, guardarInventario, edi
             <ModalBody>
                 <Form>
                     <FormGroup>
-                        <Label>ID Producto</Label>
+                        <Label>Producto</Label>
                         <Input
+                            type="select"
                             name="idProducto"
-                            onChange={(e) => actualizarDato({
-                                target: {
-                                    name: 'idProducto',
-                                    value: parseInt(e.target.value, 10) // Convertir a entero
-                                }
-                            })}
+                            onChange={(e) => actualizarDato(e)}
                             value={inventario.idProducto}
-                        />
+                        >
+
+                            {listaProductos.map((producto) => (
+                                <option key={producto.id} value={producto.id}> {producto.nombre} </option>
+                            ))}
+                        </Input>
                     </FormGroup>
+
+
                     <FormGroup>
                         <Label>Descripción</Label>
                         <Input name="descripcion" onChange={(e) => actualizarDato(e)} value={inventario.descripcion} />

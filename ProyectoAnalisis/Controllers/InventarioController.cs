@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace ProyectoAnalisis.Controllers
 {
-   /* [Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class InventarioController : ControllerBase
     {
@@ -22,39 +22,26 @@ namespace ProyectoAnalisis.Controllers
         public async Task<ActionResult<List<InventarioDTO>>> Listar()
         {
             List<InventarioDTO> lista = await _dbcontext.Inventarios
-                .Include(i => i.IdNavigation)
+                .Include(i => i.IdProductoNavigation)
                 .OrderByDescending(c => c.Id)
                 .Select(i => new InventarioDTO
                 {
                     Id = i.Id,
-                    IdProducto = i.IdNavigation.IdProducto,
-                    NombreProducto = i.IdNavigation.Nombre,
-                    MarcaProducto = i.IdNavigation.Marca,
+                    IdProducto = i.IdProductoNavigation.Id,
+                    NombreProducto = i.IdProductoNavigation.Nombre,
+                    MarcaProducto = i.IdProductoNavigation.Marca,
                     Descripcion = i.Descripcion,
                     Cantidad = i.Cantidad ?? 0,
                     FechaRegistro = i.FechaRegistro ?? DateTime.MinValue,
                     FechaCaduca = i.FechaCaduca ?? DateTime.MinValue,
                     Estado = i.Estado ?? false,
-                    Objeto = i.IdNavigation
+                    Objeto = i.IdProductoNavigation
                 })
                 .ToListAsync();
 
             return Ok(lista);
         }
 
-        
-        [HttpGet("Listar")]
-        public async Task<ActionResult<IEnumerable<Inventario>>> Listar()
-        {
-            if (_dbcontext.Inventarios == null)
-            {
-                return NotFound();
-            }
-
-            return await _dbcontext.Inventarios.ToListAsync();
-        }
-
-        
 
         [HttpPost("Guardar")]
         public async Task<IActionResult> Guardar([FromBody] Inventario request)
@@ -99,5 +86,5 @@ namespace ProyectoAnalisis.Controllers
 
 
 
-    }*/
+    }
 }

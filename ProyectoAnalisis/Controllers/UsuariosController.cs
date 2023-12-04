@@ -10,7 +10,7 @@ using ProyectoAnalisis.Models;
 
 namespace ProyectoAnalisis.Controllers
 {
-    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class UsuariosController : ControllerBase
@@ -23,7 +23,7 @@ namespace ProyectoAnalisis.Controllers
         }
 
         // GET: api/Usuarios
-        [Authorize(Policy ="RequireAdmin")]
+        [Authorize(Policy = "RequireAdmin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
         {

@@ -1,49 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import Login from "./components/Login";
 import AdminDashboard from './components/AdminDashboard';
 import ClientDashboard from './components/ClientDashboard';
-import { jwtDecode } from "jwt-decode";//decode token
-
-
-// SBAdmin2 Style
+import { jwtDecode } from "jwt-decode"; // decode token
 
 export default function App() {
-
     const [user, setUser] = useState({ id: 0, correo: '', rol: '' });
-
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    const isLogin = () => {
+    useEffect(() => {
 
-        const token = localStorage.getItem('token'); //obtener token
+        const checkAuthentication = () => {
+            const token = localStorage.getItem('token');
 
-        //obtner datos del token para el usuario
-        if (token) {
-            const decoded = jwtDecode(token);
+            //decodifica el token y obtiene su info
+            if (token) {
+                const decoded = jwtDecode(token);
+                setUser({
+                    id: decoded.id,
+                    correo: decoded.correo,
+                    rol: decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+                });
+                setIsAuthenticated(true);
+            } else {
+                setIsAuthenticated(false);
+            }
+        };
 
-            setUser({
-                id: decoded.id,
-                correo: decoded.correo,
-                rol: decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-            });
-
-        }
-        setIsAuthenticated(true);
-
-    };
+        checkAuthentication();
+    }, []); // este efecto se ejecute solo en el montaje inicial.
 
     const logout = () => {
-
         localStorage.removeItem('token');
         setUser(null);
         setIsAuthenticated(false);
-
     };
 
-    //retorno de renderizacion de componentes
     return (
         <BrowserRouter>
             {isAuthenticated ? (
@@ -55,15 +50,14 @@ export default function App() {
                     ) : (
                         <ClientDashboard user={user} logout={logout} />
                     )}
-
                 </div>
             ) : (
-
-                <Routes>
-                    <Route path="/" element={<Login onLogin={isLogin} />} >
-                    </Route>
-                </Routes>
-
+                    <Routes>
+                        <Route path="/" element={<Login onLogin={checkAuthentication} />} >
+                        </Route>
+                        {/* Si el usuario no está autenticado, redirige a la página de inicio de sesión */}
+                        <Route path="/*" element={<Navigate to="/" />} />
+                    </Routes>
             )}
         </BrowserRouter>
     );

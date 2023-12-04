@@ -37,14 +37,18 @@ namespace ProyectoAnalisis.Controllers
             if (usuario == null)
             {
                 Console.WriteLine($"Intento de inicio de sesión fallido para {email}");
-                return Unauthorized();
+                return new {
+                    success = false,
+                    message = "Credenciales incorrectas",
+                    result = ""
+                };
             }
 
-            var jwt = _configuration.GetSection("Jwt").Get<Jwt>();
+            //var jwt = _configuration.GetSection("Jwt").Get<Jwt>();
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, jwt.Subject),
+                new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                 new Claim("id", usuario.Id.ToString()),
@@ -52,9 +56,9 @@ namespace ProyectoAnalisis.Controllers
                 new Claim(ClaimTypes.Role, usuario.RolNavigation.Descripcion)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key)); //********
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"])); //********
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256); //encriptacion del key
-            var token = new JwtSecurityToken(jwt.Issuer, jwt.Audience, claims, signingCredentials: signIn); //aca se puede configurar el tiempo que durara la sesion
+            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims, signingCredentials: signIn); //aca se puede configurar el tiempo que durara la sesion
 
 
             return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(token) }); //***

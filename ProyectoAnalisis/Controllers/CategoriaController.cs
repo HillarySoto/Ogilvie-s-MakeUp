@@ -20,15 +20,17 @@ namespace OgilviesMakeUpProject.Controllers
         }
 
 
+
+
 [HttpGet("Lista")]
 public async Task<ActionResult> Lista()
 {
-    List<Categorium> lista = await _dbContext.Categoria.OrderByDescending(c => c.Id).ToListAsync();
+    List<Categoria> lista = await _dbContext.Categoria.OrderByDescending(c => c.Id).ToListAsync();
     return StatusCode(StatusCodes.Status200OK, lista);
 }
 
 
-        [HttpGet("ListaNombres")]
+[HttpGet("ListaNombres")]
         public async Task<ActionResult> ListaNombres()
         {
             List<string> nombres = await _dbContext.Categoria

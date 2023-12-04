@@ -29,7 +29,7 @@ const TablaClientes = ({ data, setUpdate, showForm, setShowForm, deleteClient })
                             <th>Cédula</th>
                             <th>Nombre</th>
                             <th>Teléfono</th>
-                            <th>Correo Electronico</th>
+                            <th>Correo Electrónico</th>
                             <th>Dirección</th>
                             <th>Fecha de registro</th>
                             <th></th>

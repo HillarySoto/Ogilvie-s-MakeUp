@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import ModalInventario from "../components/ModalInventario";
 import TablaInventario from "../components/TablaInventario";
-import { mostrarInventario, guardarInventario, editarInventario, eliminarInventario } from "../services/InventarioServicio";
+import { mostrarInventario, guardarInventario, editarInventario, eliminarInventario, listarProductos } from "../services/InventarioServicio";
+
 
 const InventarioPage = () => {
+
     const [inventarios, setInventarios] = useState([])
     const [editar, setEditar] = useState(null)
     const [mostrarModal, setMostrarModal] = useState(false)
+
+
+
+    const [productos, setProductos] = useState([])
+
+
 
 
     // Consume el servicio mostrarInvenatrio
@@ -16,15 +24,32 @@ const InventarioPage = () => {
         setInventarios(data);
     };
 
-    // Actualiza inventario
+
+    // Consume el servicio mostrarInvenatrio
+    const getProductos = async () => {
+        const data = await listarProductos(); // Llama al servicio
+        setProductos(data);
+    };
+
+
+
+
+
+
+
     const updInventario = async (inventario) => {
-        const rs = await editarInventario(inventario.id, inventario);
+        const rs = await editarInventario(inventario);
         if (rs) {
             getInventario();
         }
-        setMostrarModal(!mostrarModal);
+        setMostrarModal(false);  // Cierra el modal
         setEditar(null);
     };
+
+
+
+
+
 
     // Elimina inventario
     const deleteInventario = async (id) => {
@@ -34,10 +59,19 @@ const InventarioPage = () => {
         }
     };
 
+
+
+
+
+
     // Actualiza el estado de inventario (lista de inventario)
     useEffect(() => {
         getInventario();
-    }, [inventarios]);
+        getProductos();
+    }, []);
+
+
+
 
 
     return (
@@ -53,6 +87,7 @@ const InventarioPage = () => {
                                 editar={editar}  // para mostrar toda la info en el formulario
                                 setEditar={setEditar}
                                 editarInventario={updInventario}
+                                listaProductos={productos}
                             />
                         ) : (
                             <>

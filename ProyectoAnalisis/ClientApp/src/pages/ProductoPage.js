@@ -36,7 +36,7 @@ const ProductoPage = () => {
   // Actualiza el estado de productos (lista de productos)
   useEffect(() => {
     getProductos();
-  }, [productos]);
+  }, []);
 
   return (
     <Container>

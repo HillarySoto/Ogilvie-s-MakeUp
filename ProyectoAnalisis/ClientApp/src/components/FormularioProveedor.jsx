@@ -80,11 +80,11 @@ const FormularioProveedor = ({ mostrarModal, setMostrarModal, guardarProveedor, 
                     Cerrar
                 </Button>
             </ModalFooter>
-            
+
 
 
         </Modal>
-    
+
     )
 }
 

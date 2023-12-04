@@ -1,10 +1,9 @@
-﻿using ProyectoAnalisis.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace ProyectoAnalisis.Models;
 
-public class InventarioDTO  //
+public class InventarioDTO  
 {
     public int Id { get; set; }
     public int IdProducto { get; set; }

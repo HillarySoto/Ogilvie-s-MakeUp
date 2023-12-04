@@ -52,7 +52,7 @@ const FormularioProveedor = ({ mostrarModal, setMostrarModal, guardarProveedor, 
                 <Form>
                     <FormGroup>
                         <Label>Nombre Empresa</Label>
-                        <Input name="nombreEmpresa" onChange={(e) => actualizarDato(e)} value={proveedor.nombre}/>
+                        <Input name="nombreEmpresa" onChange={(e) => actualizarDato(e)} value={proveedor.nombreEmpresa}/>
                     </FormGroup>
                     <FormGroup>
                         <Label>Representante</Label>

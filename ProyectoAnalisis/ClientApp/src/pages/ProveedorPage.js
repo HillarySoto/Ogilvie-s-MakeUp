@@ -17,7 +17,7 @@ const ProveedorPage = () => {
 
   // Actualiza proveedor
   const updProveedor = async (proveedor) => {
-    const rs = await editarProveedor(proveedor.id, proveedor);
+    const rs = await editarProveedor(proveedor, mostrarProveedores);
     if (rs) {
       getProveedores();
     }
@@ -36,7 +36,7 @@ const ProveedorPage = () => {
   // Actualiza el estado de proveedores (lista de proveedores)
   useEffect(() => {
     getProveedores();
-  }, [proveedores]);
+  }, []);
 
   return (
     <Container>

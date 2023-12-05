@@ -12,14 +12,14 @@ const navigate = useNavigate()
     fechaEnvio: '',
     fechaLlegada: '',
     costoEnvio: 0,
-    companiaEnvio: '',
+    compañiaEnvio: '',
     numGuia: '',
   });
 
   useEffect(() => {
     const fetchEnvio = async () => {
       try {
-        const response = await fetch(`api/enviosController/ObtenerEnvio/${idEnvio}`);
+        const response = await fetch(`/api/enviosController/ObtenerEnvio/${idEnvio}`);
         const data = await response.json();
         setEnvio({
           idEnvio: data.idEnvio,
@@ -28,7 +28,7 @@ const navigate = useNavigate()
           fechaEnvio: new Date(data.fechaEnvio).toISOString().split('T')[0],
           fechaLlegada: new Date(data.fechaLlegada).toISOString().split('T')[0],
           costoEnvio: data.costoEnvio,
-          companiaEnvio: data.companiaEnvio,
+          compañiaEnvio: data.compañiaEnvio,
           numGuia: data.numGuia,
         });
       } catch (error) {
@@ -43,7 +43,7 @@ const navigate = useNavigate()
     e.preventDefault();
 
     try {
-      const response = await fetch(`api/enviosController/EditarEnvio/${idEnvio}`, {
+      const response = await fetch(`/api/enviosController/EditarEnvio/${idEnvio}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -122,8 +122,8 @@ const navigate = useNavigate()
           <input
             type="text"
             className="form-control"
-            name="companiaEnvio"
-            value={envio.companiaEnvio}
+            name="compañiaEnvio"
+            value={envio.compañiaEnvio}
             onChange={handleChange}
             required
           />

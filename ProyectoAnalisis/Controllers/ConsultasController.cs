@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OgilviesMakeUpModulos.Models;
+using ProyectoAnalisis.Models;
 using System;
 using System.Linq;
 
 namespace OgilviesMakeUpModulos.Controllers
 {
-    /*[Route("api/consultasController")]
+    [Route("api/consultasController")]
     [ApiController]
     public class ConsultasController : Controller
     {
@@ -16,41 +18,43 @@ namespace OgilviesMakeUpModulos.Controllers
         {
             _dbContext = dbContext;
         }
-
-        [HttpGet]
-        [Route("ListaConsultas")]
-        public IActionResult ListaConsultas()
-        {
-            try
+[HttpGet]
+[Route("ListaConsultas")]
+public IActionResult ListaConsultas()
+{
+    try
+    {
+        var consultasConNombresClientes = _dbContext.Consultas
+            .Select(c => new
             {
-                var consultas = _dbContext.Consultas
-                    .Select(c => new
+                IdConsulta = c.id,
+                Detalles = c.Detalles,
+               // Fecha = c.Fecha,
+                ClienteNombre = _dbContext.Usuarios
+                    .Where(cliente => cliente.Id == c.idCliente)
+                    .Select(cliente => cliente.Nombre)
+                    .FirstOrDefault(),
+                Respuestas = _dbContext.Respuestas
+                    .Where(r => r.idConsulta == c.id)
+                    .Select(r => new
                     {
-                        IdConsulta = c.IdConsulta,
-                        Detalles = c.Detalles,
-                        Fecha = c.Fecha,
-                        IdCliente = c.IdCliente,
-                        Respuestas = _dbContext.Respuestas
-                            .Where(r => r.IdConsulta == c.IdConsulta)
-                            .Select(r => new
-                            {
-                                IdRespuesta = r.IdRespuesta,
-                                DetallesRespuesta = r.Detalles,
-                                FechaRespuesta = r.Fecha,
-                                IdConsultaRespuesta = r.IdConsulta
-                            })
-                            .ToList()
+                        id = r.id,
+                        DetallesRespuesta = r.Detalles,
+                        IdConsultaRespuesta = r.idConsulta
                     })
-                    .ToList();
+                    .ToList()
+            })
+            .ToList();
 
-                return StatusCode(StatusCodes.Status200OK, consultas);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception or handle it as needed
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Error al obtener las consultas", Error = ex.Message });
-            }
-        }
+        return StatusCode(StatusCodes.Status200OK, consultasConNombresClientes);
+    }
+    catch (Exception ex)
+    {
+        // Log the exception or handle it as needed
+        return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Error al obtener las consultas", Error = ex.Message });
+    }
+}
+
 
         [HttpPost]
         [Route("ResponderConsulta/{idConsulta}")]
@@ -69,12 +73,12 @@ namespace OgilviesMakeUpModulos.Controllers
                 // Create a Respuesta entity from the input model
                 var respuesta = new Respuesta
                 {
-                    IdConsulta = idConsulta,
+                    idConsulta = idConsulta,
                     Detalles = respuestaInput.Detalles,
-                    // Set other properties if needed
+                    Fecha = DateTime.Now,  // Establecer la fecha actual
                 };
 
-                // Add the respuesta to the context
+           
                 _dbContext.Respuestas.Add(respuesta);
                 _dbContext.SaveChanges();
 
@@ -98,9 +102,9 @@ namespace OgilviesMakeUpModulos.Controllers
             {
                 var consulta = new Consulta
                 {
-                    IdCliente = consultaInput.IdCliente,
+                    idCliente = consultaInput.IdCliente,
                     Detalles = consultaInput.Detalles,
-                    Fecha = consultaInput.Fecha
+                   // Fecha = consultaInput.Fecha
                 };
 
                 // Add the consulta to the context
@@ -123,7 +127,7 @@ namespace OgilviesMakeUpModulos.Controllers
             try
             {
                 var respuestas = _dbContext.Respuestas
-                    .Where(r => r.IdConsulta == idConsulta)
+                    .Where(r => r.idConsulta == idConsulta)
                     .ToList();
 
                 return StatusCode(StatusCodes.Status200OK, respuestas);
@@ -161,7 +165,34 @@ namespace OgilviesMakeUpModulos.Controllers
         }
 
 
-    }*/
+        [HttpDelete]
+        [Route("EliminarConsulta/{idConsulta}")]
+        public IActionResult EliminarConsulta(int idConsulta)
+        {
+            try
+            {
+                // Buscar la respuesta por ID
+                var respuesta = _dbContext.Consultas.Find(idConsulta);
+
+                if (respuesta == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, new { Message = "Respuesta no encontrada" });
+                }
+
+                // Eliminar la respuesta
+                _dbContext.Consultas.Remove(respuesta);
+                _dbContext.SaveChanges();
+
+                return StatusCode(StatusCodes.Status200OK, new { Message = "Respuesta eliminada exitosamente" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Error al eliminar la respuesta", Error = ex.Message });
+            }
+        }
+
+
+    }
 
 
 

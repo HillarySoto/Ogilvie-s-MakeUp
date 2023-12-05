@@ -44,6 +44,8 @@ public partial class OgilviesmakeupContext : DbContext
     public virtual DbSet<Rol> Rols { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
+    public virtual DbSet<Consulta> Consultas { get; set; }
+    public virtual DbSet<Respuesta> Respuestas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -454,9 +456,36 @@ public partial class OgilviesmakeupContext : DbContext
                 .HasForeignKey(d => d.Rol)
                 .HasConstraintName("FK__usuarios__rol__46E78A0C");
         });
+               modelBuilder.Entity<Consulta>(entity =>
+        {
+            entity.HasKey(e => e.id).HasName("PK__consulta__9B2AD1D8FFBDC98C");
+
+            entity.ToTable("consultas");
+
+            
+                entity.HasMany(c => c.Respuesta)
+                    .WithOne(r => r.IdConsultaNavigation)
+                    .HasForeignKey(r => r.idConsulta);
+           // entity.Property(e => e.Fecha).HasColumnType("date");
+        });
+
+            modelBuilder.Entity<Respuesta>(entity =>
+        {
+            entity.HasKey(e => e.id).HasName("PK__respuest__D3480198299D8052");
+
+            entity.ToTable("respuestas");
+
+            entity.Property(e => e.Fecha).HasColumnType("date");
+
+           entity.HasOne(r => r.IdConsultaNavigation)
+                    .WithMany(c => c.Respuesta)
+                    .HasForeignKey(r => r.idConsulta);
+        });
+
 
         OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+

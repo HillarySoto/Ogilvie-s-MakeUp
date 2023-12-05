@@ -1,7 +1,7 @@
 ﻿import React, { useState } from 'react';
 import { Table, Button } from "reactstrap";
 
-const TablaDetalelsPedidos = ({ data, setEditarDetallePedido, mostrarModalDetalle, setMostrarModalDetalle, eliminarDetalles }) => {
+const TablaDetalelsPedidos = ({ data, setEditarDetallePedido, mostrarModalDetalle, setMostrarModalDetalle, eliminarDetalles, getDetallesPedido, user }) => {
 
     const itemsPerPage = 10;
     const [currentPage, setCurrentPage] = useState(1);
@@ -32,8 +32,9 @@ const TablaDetalelsPedidos = ({ data, setEditarDetallePedido, mostrarModalDetall
 
 
     const enviarDatos = (detallesPedido) => {
-       setEditarDetallePedido(detallesPedido);
-       setMostrarModalDetalle(!mostrarModalDetalle);
+        setEditarDetallePedido(detallesPedido);
+        setMostrarModalDetalle(!mostrarModalDetalle);
+        getDetallesPedido(detallesPedido.idPedido);
     };
 
     return (
@@ -68,19 +69,19 @@ const TablaDetalelsPedidos = ({ data, setEditarDetallePedido, mostrarModalDetall
                             <td colSpan="7">Sin REGISTROS</td>
                         </tr>
                     ) : (
-                            currentItems.map((detallesPedido, index) => (
-                                <tr key={detallesPedido.id}>
-                                    <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
-                                    <td>{detallesPedido.nombreProducto}</td>
-                                    <td>{detallesPedido.marcaProducto}</td>
-                                    <td>{detallesPedido.cantidad}</td>
-                                    <td>₡ {detallesPedido.subtotal}</td>
-                                    <td>
-                                        <Button color="primary" size="sm" className="me-2" onClick={() => enviarDatos(detallesPedido)}> Editar </Button>
-                                        <Button color="danger" size="sm" onClick={() => eliminarDetalles(detallesPedido.id)}> Eliminar </Button>
-                                    </td>
-                                </tr>
-                            ))
+                        currentItems.map((detallesPedido, index) => (
+                            <tr key={detallesPedido.id}>
+                                <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
+                                <td>{detallesPedido.nombreProducto}</td>
+                                <td>{detallesPedido.marcaProducto}</td>
+                                <td>{detallesPedido.cantidad}</td>
+                                <td>₡ {detallesPedido.subtotal}</td>
+                                <td>
+                                    <Button color="primary" size="sm" className="me-2" onClick={() => enviarDatos(detallesPedido)}> Editar </Button>
+                                    <Button color="danger" size="sm" onClick={() => eliminarDetalles(detallesPedido.id)}> Eliminar </Button>
+                                </td>
+                            </tr>
+                        ))
                     )}
                 </tbody>
             </Table>

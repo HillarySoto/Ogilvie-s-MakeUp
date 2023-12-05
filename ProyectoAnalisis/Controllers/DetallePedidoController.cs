@@ -119,7 +119,7 @@ namespace Ogilvies_Maquillaje.Controllers
 
 
 
-            [HttpDelete("Eliminar/{id:int}")]
+        [HttpDelete("Eliminar/{id:int}")]
         public async Task<IActionResult> EliminarDetallePedido(int id)
         {
             if (_dbcontext.DetallePedidos == null)
@@ -159,11 +159,6 @@ namespace Ogilvies_Maquillaje.Controllers
 
             return detallePedido;
         }
-
-
-
-
-
 
     }
 }

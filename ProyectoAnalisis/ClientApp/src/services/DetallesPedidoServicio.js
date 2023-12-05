@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 
 export const mostrarDetallesPedidos = async (id) => { //para monstrar el inventario
 
-    const response = await fetch("api/DetallePedido/ListarPorId/" +id);
+    const response = await fetch("api/DetallePedido/ListarPorId/" + id);
 
     try {
         if (response.ok) {
@@ -45,7 +45,7 @@ export const actualizarTotalPedido = async (idPedido) => {
 export const guardarDetalleProducto = async (detallePedido) => {
     try {
         const result = await Swal.fire({
-            title: 'Desea añadir esto a su pedido?',
+            title: 'Desea a&ntildeadir esto a su pedido?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -57,13 +57,13 @@ export const guardarDetalleProducto = async (detallePedido) => {
         if (result.isConfirmed) {
 
 
-        await fetch("api/DetallePedido/Guardar", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            },
-            body: JSON.stringify(detallePedido),
-        });
+            await fetch("api/DetallePedido/Guardar", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(detallePedido),
+            });
 
         }
 
@@ -71,7 +71,7 @@ export const guardarDetalleProducto = async (detallePedido) => {
         console.error("Error al guardar el detalle:", error);
         throw error;
     } finally {
-       // mostrarDetallesPedidos();
+        // mostrarDetallesPedidos();
     }
 };
 
@@ -101,7 +101,7 @@ export const editarDetallesPedido = async (detallePedido) => {
         console.error("Error al editar la entrada de DetallePedido:", error);
         throw error;
     } finally {
-      //  mostrarDetallesPedidos();
+        //  mostrarDetallesPedidos();
     }
 };
 
@@ -132,7 +132,7 @@ export const eliminarDetallesPedido = async (id) => {
             console.error("Error al eliminar el DetallePedido:", error);
             throw error;
         } finally {
-         //   mostrarDetallesPedidos();
+            //   mostrarDetallesPedidos();
         }
     }
 };

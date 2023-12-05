@@ -20,19 +20,6 @@ namespace Ogilvies_Maquillaje.Controllers
             _dbcontext = context;
         }
 
-        /*
-        [HttpGet("Listar")]
-        public async Task<ActionResult<IEnumerable<Pedido>>> Listar()
-        {
-            if (_dbcontext.Pedidos == null)
-            {
-                return NotFound();
-            }
-
-            return await _dbcontext.Pedidos.ToListAsync();
-        }
-
-        */
 
         [HttpGet("Listar")]
         public async Task<ActionResult<List<PedidoDTO>>> Listar()
@@ -43,9 +30,9 @@ namespace Ogilvies_Maquillaje.Controllers
                 .Select(i => new PedidoDTO
                 {
                     Id = i.Id,
-                    IdCliente=i.IdCliente,
+                    IdCliente = i.IdCliente,
                     NombreCliente = i.IdClienteNavigation.Nombre,
-                    FechaRegistro =i.FechaRegistro,
+                    FechaRegistro = i.FechaRegistro,
                     Total = i.Total ?? 0,
                     Estado = i.Estado ?? 0,
 
@@ -56,16 +43,13 @@ namespace Ogilvies_Maquillaje.Controllers
             return Ok(lista);
         }
 
-         
- 
-
 
 
         [HttpGet("Buscar/{id:int}")]
         public async Task<ActionResult<Pedido>> GetPedido(int id)
         {
 
-                if (_dbcontext.Pedidos == null)
+            if (_dbcontext.Pedidos == null)
             {
                 return NotFound();
             }

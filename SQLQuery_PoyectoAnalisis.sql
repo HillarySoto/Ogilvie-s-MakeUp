@@ -102,7 +102,7 @@ CREATE TABLE detallePedido (
 	cantidad int,
 	subtotal int,
 	CONSTRAINT FK_DetallePedido_Pedido FOREIGN KEY (idPedido) REFERENCES pedido (id),
-	CONSTRAINT FK_DetallePedido_Producto FOREIGN KEY (idProducto) REFERENCES producto (id)
+	CONSTRAINT FK_DetallePedido_Producto FOREIGN KEY (idProducto) REFERENCES producto (id) ON DELETE CASCADE
 );
 
 

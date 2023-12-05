@@ -43,7 +43,7 @@ export const editarPedido = async (id, pedido) => {
 
     try {
         const result = await Swal.fire({
-            title: 'Actualizar Información?',
+            title: 'Actualizar Informacii&oacuten?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -84,7 +84,7 @@ export const editarPedido = async (id, pedido) => {
 
 export const eliminarPedido = async (id) => {
     const respuesta = await Swal.fire({
-        title: 'Eliminar Inventario?',
+        title: 'Eliminar Pedido?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

@@ -45,20 +45,20 @@ const TablaCarrito = ({ data, setEditarCarrito, mostrarModalCarrito, setMostrarM
                             <td colSpan="9">Sin REGISTROS</td>
                         </tr>
                     ) : (
-                            console.log(data),
-                            currentItems.filter((item) => item.idCliente == user.id) // Filtrar por idCliente igual a user.id
-                                .map((item, index)=> (
-                            <tr key={item.id}>
-                                <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
-                                <td>{item.nombreProducto}</td>
-                                <td>{item.marcaProducto}</td>
-                                <td>{item.cantidad}</td>
-                                <td>
-                                    <Button color="primary" size="sm" className="me-2" onClick={() => enviarDatos(item)}> Editar </Button>
-                                    <Button color="danger" size="sm" onClick={() => deleteCarrito(item.id)}> Eliminar </Button>
-                                </td>
-                            </tr>
-                        ))
+                        console.log(data),
+                        currentItems.filter((item) => item.idCliente == user.id) // Filtrar por idCliente igual a user.id
+                            .map((item, index) => (
+                                <tr key={item.id}>
+                                    <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
+                                    <td>{item.nombreProducto}</td>
+                                    <td>{item.marcaProducto}</td>
+                                    <td>{item.cantidad}</td>
+                                    <td>
+                                        <Button color="primary" size="sm" className="me-2" onClick={() => enviarDatos(item)}> Editar </Button>
+                                        <Button color="danger" size="sm" onClick={() => deleteCarrito(item.id)}> Eliminar </Button>
+                                    </td>
+                                </tr>
+                            ))
                     )}
                 </tbody>
             </Table>

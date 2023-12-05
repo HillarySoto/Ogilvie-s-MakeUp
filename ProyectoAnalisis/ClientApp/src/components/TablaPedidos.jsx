@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Table, Button } from "reactstrap";
 import { parseISO, format } from 'date-fns';
 
@@ -10,7 +10,7 @@ function formatearFecha(fecha) {
     return `${dia}-${mes < 10 ? "0" : ""}${mes}-${anio}`;
 }
 
-const TablaPedidos = ({ data, setEditarPedido, mostrarModalPedido, setMostrarModalPedido, deletePedido, getDetallesPedido }) => {
+const TablaPedidos = ({ data, setEditarPedido, mostrarModalPedido, setMostrarModalPedido, deletePedido, getDetallesPedido, getPedidos, user }) => {
     const itemsPerPage = 10;
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -24,7 +24,10 @@ const TablaPedidos = ({ data, setEditarPedido, mostrarModalPedido, setMostrarMod
         pedido.fechaRegistro = parseISO(pedido.fechaRegistro);
         setEditarPedido(pedido);
         setMostrarModalPedido(!mostrarModalPedido);
+
+        getPedidos();
     };
+
 
     return (
         <div>
@@ -47,29 +50,37 @@ const TablaPedidos = ({ data, setEditarPedido, mostrarModalPedido, setMostrarMod
                             <td colSpan="7">Sin REGISTROS</td>
                         </tr>
                     ) : (
-                        currentItems.map((pedido, index) => (
-                            <tr key={pedido.id}>
-                                <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
-                                <td>{pedido.nombreCliente}</td>
-                                <td>{formatearFecha(pedido.fechaRegistro)}</td>
-                                <td>₡ {pedido.total}</td>
-                                <td>
-                                    {pedido.estado === 0 ? "Inactivo" :
-                                        pedido.estado === 1 ? "Solicitado" :
-                                            pedido.estado === 2 ? "Pagado" :
-                                                pedido.estado === 3 ? "Confirmado" :
-                                                    pedido.estado === 4 ? "Enviado" :
-                                                        pedido.estado === 5 ? "Devuelto" : ""}
-                                </td>
-                                <td>
-                                    <Button color="secondary" size="sm" className="me-2" onClick={() => getDetallesPedido(pedido.id)}> Detalles Orden </Button>
-                                </td>
-                                <td>
-                                    <Button color="primary" size="sm" className="me-2" onClick={() => enviarDatos(pedido)}> Editar </Button>
-                                    <Button color="danger" size="sm" onClick={() => deletePedido(pedido.id)}> Eliminar </Button>
-                                </td>
-                            </tr>
-                        ))
+                            currentItems
+                                .filter((item) => {
+                                    if (user.rol == "Admin") {
+                                        return true; // Mostrar todos los elementos para el administrador
+                                    } else {
+                                        return item.idCliente == user.id;
+                                    }
+                                })
+                                .map((pedido, index) => (
+                                <tr key={pedido.id}>
+                                    <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
+                                    <td>{pedido.nombreCliente}</td>
+                                    <td>{formatearFecha(pedido.fechaRegistro)}</td>
+                                    <td>₡ {pedido.total}</td>
+                                    <td>
+                                        {pedido.estado === 0 ? "Inactivo" :
+                                            pedido.estado === 1 ? "Solicitado" :
+                                                pedido.estado === 2 ? "Pagado" :
+                                                    pedido.estado === 3 ? "Confirmado" :
+                                                        pedido.estado === 4 ? "Enviado" :
+                                                            pedido.estado === 5 ? "Devuelto" : ""}
+                                    </td>
+                                    <td>
+                                        <Button color="secondary" size="sm" className="me-2" onClick={() => getDetallesPedido(pedido.id)}> Detalles Orden </Button>
+                                    </td>
+                                    <td>
+                                        <Button color="primary" size="sm" className="me-2" onClick={() => enviarDatos(pedido)}> Editar </Button>
+                                        <Button color="danger" size="sm" onClick={() => deletePedido(pedido.id)}> Eliminar </Button>
+                                    </td>
+                                </tr>
+                            ))
                     )}
                 </tbody>
             </Table>

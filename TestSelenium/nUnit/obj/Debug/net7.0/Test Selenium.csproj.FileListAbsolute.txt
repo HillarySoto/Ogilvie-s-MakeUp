@@ -1,0 +1,27 @@
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\obj\Debug\net7.0\Test Selenium.csproj.AssemblyReference.cache
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\obj\Debug\net7.0\Test Selenium.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\obj\Debug\net7.0\Test Selenium.AssemblyInfoInputs.cache
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\obj\Debug\net7.0\Test Selenium.AssemblyInfo.cs
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\obj\Debug\net7.0\Test Selenium.csproj.CoreCompileInputs.cache
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\selenium-manager\linux\selenium-manager
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\selenium-manager\macos\selenium-manager
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\selenium-manager\windows\selenium-manager.exe
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\Test Selenium.exe
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\Test Selenium.deps.json
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\Test Selenium.runtimeconfig.json
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\Test Selenium.dll
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\Test Selenium.pdb
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\nunit.framework.dll
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\nunit.framework.legacy.dll
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\WebDriver.dll
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\obj\Debug\net7.0\Test Selenium.csproj.CopyComplete
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\obj\Debug\net7.0\Test Selenium.dll
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\obj\Debug\net7.0\refint\Test Selenium.dll
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\obj\Debug\net7.0\Test Selenium.pdb
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\obj\Debug\net7.0\Test Selenium.genruntimeconfig.cache
+C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\obj\Debug\net7.0\ref\Test Selenium.dll

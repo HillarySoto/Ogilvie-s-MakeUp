@@ -116,32 +116,32 @@ const CarritoPage = ({ user }) => {
                         ) : (
                             <>
                                 <div className="d-flex justify-content-between mb-5">
-                                        <h2>Carrito de compras</h2>
-                                        <Button
-                                            size="sm-13"
-                                            color="success"
-                                            onClick={() => setMostrarModalCarrito(!mostrarModalCarrito)}
-                                            style={{ marginRight: "55px" }}
-                                        >
-                                            Agregar producto la carrito
-
-                                        </Button>
+                                    <h2>Carrito de compras</h2>
                                     <Button
                                         size="sm-13"
                                         color="success"
-                                            onClick={() => crearPedido(parseInt(user.id, 10))}
+                                        onClick={() => setMostrarModalCarrito(!mostrarModalCarrito)}
+                                        style={{ marginRight: "55px" }}
+                                    >
+                                        Agregar producto la carrito
+
+                                    </Button>
+                                    <Button
+                                        size="sm-13"
+                                        color="success"
+                                        onClick={() => crearPedido(parseInt(user.id, 10))}
                                         style={{ marginRight: "55px" }}
                                     >
                                         Crear Pedido
                                     </Button>
                                 </div>
-                                    <TablaCarrito
-                                        data={Carrito}
-                                        setEditarCarrito={setEditarCarrito}
-                                        mostrarModalCarrito={mostrarModalCarrito}
-                                        setMostrarModalCarrito={setMostrarModalCarrito}
-                                        deleteCarrito={deleteCarrito}
-                                        user={user}
+                                <TablaCarrito
+                                    data={Carrito}
+                                    setEditarCarrito={setEditarCarrito}
+                                    mostrarModalCarrito={mostrarModalCarrito}
+                                    setMostrarModalCarrito={setMostrarModalCarrito}
+                                    deleteCarrito={deleteCarrito}
+                                    user={user}
                                 />
                             </>
                         )}

@@ -32,8 +32,8 @@ namespace Ogilvies_Maquillaje.Controllers
                 .Select(i => new CarritoDTO
                 {
                     Id = i.Id,
-                    IdCliente=i.IdCliente,
-                    IdProducto=i.IdProducto,
+                    IdCliente = i.IdCliente,
+                    IdProducto = i.IdProducto,
                     NombreProducto = i.IdProductoNavigation.Nombre,
                     MarcaProducto = i.IdProductoNavigation.Marca,
                     NombreCliente = i.IdClienteNavigation.Nombre,
@@ -45,15 +45,15 @@ namespace Ogilvies_Maquillaje.Controllers
             return Ok(lista);
         }
 
-         
- 
+
+
 
 
 
         [HttpGet("Buscar/{id:int}")]
         public async Task<ActionResult<Carrito>> GetCarrito(int id)
         {
-                if (_dbcontext.Carritos == null)
+            if (_dbcontext.Carritos == null)
             {
                 return NotFound();
             }
@@ -134,11 +134,6 @@ namespace Ogilvies_Maquillaje.Controllers
                 return BadRequest($"Error al crear el pedido desde el carrito: {ex.Message}");
             }
         }
-
-
-
-
-
 
     }
 }

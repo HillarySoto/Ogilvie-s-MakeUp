@@ -9,7 +9,7 @@ import { mostrarDetallesPedidos, guardarDetalleProducto, editarDetallesPedido, e
 
 
 
-const PedidoPage = () => {
+const PedidoPage = ({ user }) => {
 
     //para administrar los pedidos
     const [pedidos, setPedidos] = useState([]);
@@ -74,22 +74,11 @@ const PedidoPage = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
     // Consume el servicio mostrarInvenatrio
     const getProductos = async () => {
         const data = await listarProductos(); // Llama al servicio
         setProductos(data);
     };
-
 
 
 
@@ -153,7 +142,7 @@ const PedidoPage = () => {
 
                            // />
                         ) :*/ mostrarModalDetalle ? (
-                            <ModalDetallesPedido
+                                <ModalDetallesPedido
                                     mostrarModalDetalle={mostrarModalDetalle}
                                     setMostrarModalDetalle={setMostrarModalDetalle}
                                     guardarDetalleProducto={guardarDetalleProducto}
@@ -162,43 +151,48 @@ const PedidoPage = () => {
                                     actualizarDetallesPedido={actualizarDetallesPedido}
                                     listaProductos={productos}
                                     actualizarMontoTotalPedido={actualizarMontoTotalPedido}
+                                    getDetallesPedido={getDetallesPedido}
+                                    user={user}
                                 />
 
 
                             ) : mostrarDetalles ? (
                                 <>
-
                                     <TablaDetallesPedidos
                                         data={detallePedido}
                                         setEditarDetallePedido={setEditarDetallePedido}
                                         mostrarModalDetalle={mostrarModalDetalle}
                                         setMostrarModalDetalle={setMostrarModalDetalle}
                                         eliminarDetalles={eliminarDetalles}
+                                        getDetallesPedido={getDetallesPedido}
+                                        user={user}
                                     />
                                 </>
                             ) : (
-                            <>
-                                <div className="d-flex justify-content-between mb-5">
-                                    <h2>Registro Pedido</h2>
-                                    <Button
-                                        size="sm-13"
-                                        color="success"
-                                        onClick={() => setMostrarModalPedido(!mostrarModalPedido)}
-                                        style={{ marginRight: "55px" }}
-                                    >
-                                        Registrar Pedido
-                                    </Button>
-                                </div>
-                                <TablaPedidos
-                                    data={pedidos}
-                                    setEditarPedido={setEditarPedido}
-                                    mostrarModalPedido={mostrarModalPedido}
-                                    setMostrarModalPedido={setMostrarModalPedido}
-                                    deletePedido={deletePedido}
-                                    getDetallesPedido={getDetallesPedido}
-                                />
-                            </>
-                        )}
+                                <>
+                                    <div className="d-flex justify-content-between mb-5">
+                                        <h2>Registro Pedido</h2>
+                                        <Button
+                                            size="sm-13"
+                                            color="success"
+                                            onClick={() => setMostrarModalPedido(!mostrarModalPedido)}
+                                            style={{ marginRight: "55px" }}
+                                        >
+                                            Registrar Pedido
+                                        </Button>
+                                    </div>
+                                    <TablaPedidos
+                                        data={pedidos}
+                                        setEditarPedido={setEditarPedido}
+                                        mostrarModalPedido={mostrarModalPedido}
+                                        setMostrarModalPedido={setMostrarModalPedido}
+                                        deletePedido={deletePedido}
+                                        getDetallesPedido={getDetallesPedido}
+                                        getPedidos={getPedidos}
+                                        user={user}
+                                    />
+                                </>
+                            )}
                     </div>
                 </Col>
             </Row>

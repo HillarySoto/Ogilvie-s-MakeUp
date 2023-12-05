@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 
 export const mostrarCarrito = async (id) => { //para monstrar el inventario
 
-    const response = await fetch("api/Carrito/ListarCarrito/" +id);
+    const response = await fetch("api/Carrito/ListarCarrito/" + id);
 
     try {
         if (response.ok) {
@@ -36,7 +36,7 @@ export const addToCart = async (objeto) => {
         console.error("Error al agregar al carrito:", error);
         throw error;
     } finally {
-       //mostrarDetallesPedidos();
+        //mostrarDetallesPedidos();
     }
 };
 
@@ -66,7 +66,7 @@ export const editarProductoCarrito = async (objeto) => {
         console.error("Error al editar la entrada de Carrito:", error);
         throw error;
     } finally {
-      //  mostrarDetallesPedidos();
+        //  mostrarDetallesPedidos();
     }
 };
 
@@ -97,7 +97,7 @@ export const eliminarProductoCarrito = async (id) => {
             console.error("Error al eliminar el Carrito:", error);
             throw error;
         } finally {
-         //   mostrarDetallesPedidos();
+            //   mostrarDetallesPedidos();
         }
     }
 };

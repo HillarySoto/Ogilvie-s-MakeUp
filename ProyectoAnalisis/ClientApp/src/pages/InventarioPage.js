@@ -32,11 +32,6 @@ const InventarioPage = () => {
     };
 
 
-
-
-
-
-
     const updInventario = async (inventario) => {
         const rs = await editarInventario(inventario);
         if (rs) {
@@ -45,7 +40,6 @@ const InventarioPage = () => {
         setMostrarModal(false);  // Cierra el modal
         setEditar(null);
     };
-
 
 
 
@@ -88,6 +82,7 @@ const InventarioPage = () => {
                                 setEditar={setEditar}
                                 editarInventario={updInventario}
                                 listaProductos={productos}
+                                getInventario={getInventario}
                             />
                         ) : (
                             <>

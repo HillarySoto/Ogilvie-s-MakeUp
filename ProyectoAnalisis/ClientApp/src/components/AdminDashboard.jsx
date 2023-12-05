@@ -28,7 +28,7 @@ function AdminDashboard({user}) {
                 <Route path="/proveedores" element={<ProveedorPage />} />
                 <Route path="/inventario" element={<InventarioPage />} />
                 <Route path="/clientes" element={<ClientsPage />} />
-                <Route path="/pedido" element={<PedidosPage />} />
+                <Route path="/pedido" element={<PedidosPage user={user} />} />
                 <Route path="/envios" element={<ListaEnvios />} />
                 <Route path="/formulario-consulta" element={<CrearConsultaForm />} />
                 <Route path="/editar-envio/:idEnvio" element={<EditarEnvio />} />

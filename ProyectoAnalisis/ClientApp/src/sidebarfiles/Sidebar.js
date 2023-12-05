@@ -10,18 +10,19 @@ const Sidebar = ({ rol }) => {
   const navigate = useNavigate()
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [menuItems, setMenuItems] = useState({
-    clients: false,
-    categories: false, //--> categories lo estan usando en el item pedidos ¿por qué?
-    providers: false,
-    products: false,
-    inventory: false,
-    orders: false,
-    shipments: false,
-    returns: false,
-    promotions: false,
-    support: false,
-    payments: false,
-    categorias: false
+      clients: false,
+      categories: false, //--> categories lo estan usando en el item pedidos ¿por qué?
+      providers: false,
+      products: false,
+      inventory: false,
+      orders: false,
+      shipments: false,
+      returns: false,
+      promotions: false,
+      support: false,
+      payments: false,
+      categorias: false,
+      shoppingCart: false
   });
 
   const handleMenuToggle = (menuItem) => {
@@ -180,30 +181,29 @@ const Sidebar = ({ rol }) => {
 
 
 
-          {/* Nav Item DetallesPedido - Categorías Collapse Menu ************************/}
+          {/* Nav Item Carrito - Categorías Collapse Menu ************************/}
           <li className="nav-item">
               <a
                   className="nav-link"
-                  onClick={() => handleMenuToggle('details')}
-                  aria-expanded={menuItems.details ? 'true' : 'false'}
+                  onClick={() => handleMenuToggle('shoppingCart')}
+                  aria-expanded={menuItems.shoppingCart ? 'true' : 'false'}
                   aria-controls="collapseCategories"
               >
                   <i className="fas fa-fw fa-folder"></i>
-                  <span>Detalles Pedido</span>
+                  <span>Carrito</span>
               </a>
               <div
                   id="collapseCategories"
-                  className={`collapse ${menuItems.details ? 'show' : ''}`}
+                  className={`collapse ${menuItems.shoppingCart ? 'show' : ''}`}
                   aria-labelledby="headingCategories"
               >
                   <div className="bg-white py-2 collapse-inner rounded">
-                      <a className="collapse-item" onClick={() => navigate('/detallesPedido')}>
-                          Administrar Detalles
+                      <a className="collapse-item" onClick={() => navigate('/carrito')}>
+                          Ver carrito
                       </a>
                   </div>
               </div>
           </li>
-
 
 
       {/* Nav Item Envios - Proveedores Collapse Menu *************************************/}

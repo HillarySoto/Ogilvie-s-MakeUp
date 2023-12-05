@@ -10,7 +10,7 @@ export const mostrarProductos = async () => {
   }
 };
 
-export const guardarProducto = async (producto, setMostrarModalProducto) => {
+export const guardarProducto = async (producto, setMostrarModal) => {
   try {
     await fetch("api/Producto/Guardar", {
       method: 'POST',
@@ -20,7 +20,7 @@ export const guardarProducto = async (producto, setMostrarModalProducto) => {
       body: JSON.stringify(producto),
     });
 
-    setMostrarModalProducto(false);
+    setMostrarModal(false);
   } catch (error) {
     console.error("Error al guardar el producto:", error);
     throw error;
@@ -29,7 +29,7 @@ export const guardarProducto = async (producto, setMostrarModalProducto) => {
   }
 };
 
-export const editarProducto = async (producto, setMostrarModalProducto) => {
+export const editarProducto = async (producto, setMostrarModal) => {
   try {
     const result = await Swal.fire({
       title: 'Actualizar Información?',
@@ -50,7 +50,7 @@ export const editarProducto = async (producto, setMostrarModalProducto) => {
         body: JSON.stringify(producto),
       });
 
-      setMostrarModalProducto(false);
+      setMostrarModal(false);
     }
   } catch (error) {
     console.error("Error al editar el producto:", error);

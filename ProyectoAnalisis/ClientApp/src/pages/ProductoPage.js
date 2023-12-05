@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
-import ListaProducto from "../components/ListaProducto";
+import ListaProducto from "../components/ListaProductoAdmin";
 import FormularioProducto from "../components/FormularioProducto";
 import { mostrarProductos, guardarProducto, editarProducto, eliminarProducto } from "../services/ProductoServicio";
 
 const ProductoPage = () => {
   const [productos, setProductos] = useState([]);
-  const [update, setUpdate] = useState(null);
+  const [editar, setEditar] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
   // Consume el servicio mostrarProductos
@@ -17,21 +17,20 @@ const ProductoPage = () => {
 
   // Actualiza producto
   const updProducto = async (producto) => {
-    const rs = await editarProducto(producto.id, producto);
+    const rs = await editarProducto(producto, setShowForm);  // Corregir aquí
     if (rs) {
       getProductos();
     }
-    setShowForm(!showForm);
-    setUpdate(null);
+    setEditar(null);
   };
 
-  // Elimina producto
-  const deleteProducto = async (id) => {
-    const result = await eliminarProducto(id);
-    if (result) {
-      getProductos();
-    }
-  };
+// Elimina producto
+const handleEliminarProducto = async (id) => {
+  await eliminarProducto(id);
+  getProductos();  // Actualiza la lista después de eliminar
+};
+
+
 
   // Actualiza el estado de productos (lista de productos)
   useEffect(() => {
@@ -48,9 +47,10 @@ const ProductoPage = () => {
                 mostrarModal={showForm}
                 setMostrarModal={setShowForm}
                 guardarProducto={guardarProducto}
-                editar={update}
-                setEditar={setUpdate}
+                editar={editar}
+                setEditar={setEditar}
                 editarProducto={updProducto}
+                mostrarProductos={getProductos}
               />
             ) : (
               <>
@@ -59,7 +59,7 @@ const ProductoPage = () => {
                   <Button
                     size="sm-13"
                     color="success"
-                    onClick={() => setShowForm(!showForm)}
+                    onClick={() => setShowForm(true)}
                     style={{ marginRight: "55px" }}
                   >
                     Registrar Producto
@@ -67,10 +67,10 @@ const ProductoPage = () => {
                 </div>
                 <ListaProducto
                   data={productos}
-                  setUpdate={setUpdate}
+                  setEditar={setEditar}
                   showForm={showForm}
-                  setShowForm={setShowForm}
-                  deleteProducto={deleteProducto}
+                  setMostrarModal={setShowForm}
+                  eliminarProducto={handleEliminarProducto}
                 />
               </>
             )}

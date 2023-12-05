@@ -1,5 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, ModalFooter, Button } from "reactstrap";
+import Swal from "sweetalert2";
+import { mostrarProductos } from "../services/ProductoServicio";
 
 const modeloProducto = {
     id: 0,
@@ -12,19 +14,17 @@ const modeloProducto = {
     marca: ""
 };
 
-const FormularioProducto = ({ mostrarModal, setMostrarModal, guardarProducto, editar, setEditar, editarProducto }) => {
+const FormularioProducto = ({ mostrarModal, setMostrarModal, guardarProducto, editar, setEditar, editarProducto, mostrarProductos }) => {
     const [producto, setProducto] = useState(modeloProducto);
     const [proveedores, setProveedores] = useState([]);
     const [categorias, setCategorias] = useState([]);
 
     useEffect(() => {
-        // Lógica para cargar los proveedores desde tu backend
         fetch("/api/Proveedor/Lista")
             .then(response => response.json())
             .then(data => setProveedores(data))
             .catch(error => console.error('Error al cargar proveedores:', error));
 
-        // Lógica para cargar las categorías desde tu backend
         fetch("/api/Categoria/Lista")
             .then(response => response.json())
             .then(data => setCategorias(data))
@@ -44,17 +44,19 @@ const FormularioProducto = ({ mostrarModal, setMostrarModal, guardarProducto, ed
         });
     };
 
-    const enviarDatos = () => {
+    const enviarDatos = async () => {
         if (producto.id === 0) {
-            guardarProducto(producto);
+            await guardarProducto(producto, setMostrarModal);
+            mostrarProductos();
         } else {
-            editarProducto(producto);
+            await editarProducto(producto, setMostrarModal);
+            mostrarProductos();
         }
         setProducto(modeloProducto);
     };
 
     const cerrarModal = () => {
-        setMostrarModal(!mostrarModal);
+        setMostrarModal(false);
         setEditar(null);
     };
 
@@ -106,7 +108,6 @@ const FormularioProducto = ({ mostrarModal, setMostrarModal, guardarProducto, ed
                         <Label>Marca</Label>
                         <Input name="marca" onChange={(e) => actualizarDato(e)} value={producto.marca} />
                     </FormGroup>
-                    {/* Agrega el resto de los campos del formulario según sea necesario */}
                     <FormGroup>
                         <Label>Precio</Label>
                         <Input name="precio" type="number" step="0.01" onChange={(e) => actualizarDato(e)} value={producto.precio} />

@@ -1,12 +1,12 @@
 ﻿import React from "react";
 import { Table, Button } from "reactstrap";
 
-const ListaProducto = ({ data, setEditar, mostrarModal, setMostrarModal, eliminarProducto }) => {
+const ListaProductoAdmin = ({ data, setEditar, mostrarModal, setMostrarModal, eliminarProducto }) => {
     console.log("Datos recibidos en ListaProducto:", data);
 
     const enviarDatos = (producto) => {
         setEditar(producto);
-        setMostrarModal(!mostrarModal);
+        setMostrarModal(!mostrarModal); 
     };
 
     return (
@@ -52,4 +52,4 @@ const ListaProducto = ({ data, setEditar, mostrarModal, setMostrarModal, elimina
     );
 };
 
-export default ListaProducto;
+export default ListaProductoAdmin;

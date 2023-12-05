@@ -1,27 +1,39 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using ProyectoAnalisis.Models;
 
-namespace ProyectoMaquillajeN.Controllers
+
+
+namespace OgilviesMakeUpProject.Controllers;
 {
-    /*[Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class APIController : ControllerBase
+    public class PromocionesController : ControllerBase
     {
-        private readonly ProyectoMakeupModulosContext _modulosContext;
+        private readonly OgilviesmakeupContext _modulosContext;
 
-        public APIController(ProyectoMakeupModulosContext context)
+        public PromocionesController(OgilviesmakeupContext context)
         {
             _modulosContext = context;
 
         }
 
         [HttpGet]
-        [Route("Lista")]
-        public async Task<IActionResult> Lista()
-        {
+      //  [Route("Lista")]
+        public async Task<ActionResult<IEnumerable<Promocione>>> Lista()
+
+        { /*
             List<Promocione> lista = await _modulosContext.Promociones.OrderByDescending(c => c.IdPromocion).ToListAsync();
 
-            return StatusCode(StatusCodes.Status200OK, lista);
+            return StatusCode(StatusCodes.Status200OK, lista);*/
+            if (_modulosContext.Promociones == null)
+          {
+              return NotFound();
+          }
+
+            return await _modulosContext.Promociones.ToListAsync();
+
         }
 
         [HttpPost]
@@ -58,6 +70,7 @@ namespace ProyectoMaquillajeN.Controllers
 
         }
 
-    }*/
+    }
 
 }
+

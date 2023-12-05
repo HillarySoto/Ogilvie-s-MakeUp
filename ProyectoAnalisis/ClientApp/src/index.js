@@ -12,6 +12,10 @@ import ListaConsultas from "./components/ListaConsultas";
 import Sidebar from "./sidebarfiles/Sidebar";
 import EditarEnvio from "./components/EditarEnvio";
 import ClientsPage from "./pages/ClientsPage";
+import ListaPromociones from "./components/ListaPromociones";
+import FormularioPromocion from "./components/FormularioPromocion";
+
+
 //SBAdmin2 Style
 
 export default function App() {
@@ -27,11 +31,13 @@ export default function App() {
                     <Route path="/clientes" element={<ClientsPage/>}/>
                     <Route path="/pedidos" element={<ListaPedidos />} />
                     <Route path="/envios" element={<ListaEnvios />} />
+                    <Route path="/promociones" element={<ListaPromo />} />
                     <Route path="/formulario-consulta" element={<CrearConsultaForm />} />
                     <Route path="/editar-envio/:idEnvio" element={<EditarEnvio />} />
                     <Route path="/consultas" element={<ListaConsultas />} />
                     <Route path="/formulario-pedido/:idPedido" element={<ModificarPedidoForm />} />
                     <Route path="/formulario-envio/:idPedido" element={<FormularioEnvio />} />
+                    <Route path="/formulario-promo/:idPromo" element={<FormularioEnvio />} />
                 </Routes>
             </div>
         </BrowserRouter>

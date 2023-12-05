@@ -160,7 +160,5 @@ namespace Ogilvies_Maquillaje.Controllers
             return detallePedido;
         }
 
-
-
     }
 }

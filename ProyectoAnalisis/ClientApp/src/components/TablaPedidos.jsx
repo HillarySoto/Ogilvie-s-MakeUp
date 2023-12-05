@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Table, Button } from "reactstrap";
 import { parseISO, format } from 'date-fns';
 
@@ -28,6 +28,7 @@ const TablaPedidos = ({ data, setEditarPedido, mostrarModalPedido, setMostrarMod
         getPedidos();
     };
 
+
     return (
         <div>
             <Table striped responsive>
@@ -49,8 +50,15 @@ const TablaPedidos = ({ data, setEditarPedido, mostrarModalPedido, setMostrarMod
                             <td colSpan="7">Sin REGISTROS</td>
                         </tr>
                     ) : (
-                        currentItems.filter((item) => (user.rol !== "admin" ? item.idCliente == user.id : true))
-                            .map((pedido, index) => (
+                            currentItems
+                                .filter((item) => {
+                                    if (user.rol == "Admin") {
+                                        return true; // Mostrar todos los elementos para el administrador
+                                    } else {
+                                        return item.idCliente == user.id;
+                                    }
+                                })
+                                .map((pedido, index) => (
                                 <tr key={pedido.id}>
                                     <td>{index + 1 + (currentPage - 1) * itemsPerPage}</td>
                                     <td>{pedido.nombreCliente}</td>

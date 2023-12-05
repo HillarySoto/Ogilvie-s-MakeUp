@@ -22,6 +22,7 @@ const PedidoPage = ({ user }) => {
     const [editarDetallePedido, setEditarDetallePedido] = useState(null);
     const [mostrarModalDetalle, setMostrarModalDetalle] = useState(false);
 
+
     const [mostrarDetalles, setMostrarDetalles] = useState(false);
 
 
@@ -118,9 +119,17 @@ const PedidoPage = ({ user }) => {
 
     // Actualiza el estado de pedidos (lista de pedidos)
     useEffect(() => {
-        getPedidos();
-        getProductos();
+        const fetchData = async () => {
+            const pedidosData = await mostrarPedidos();
+            const productosData = await listarProductos();
+
+            setPedidos(pedidosData);
+            setProductos(productosData);
+        };
+
+        fetchData();
     }, []);
+
 
 
 
@@ -171,15 +180,7 @@ const PedidoPage = ({ user }) => {
                             ) : (
                                 <>
                                     <div className="d-flex justify-content-between mb-5">
-                                        <h2>Registro Pedido</h2>
-                                        <Button
-                                            size="sm-13"
-                                            color="success"
-                                            onClick={() => setMostrarModalPedido(!mostrarModalPedido)}
-                                            style={{ marginRight: "55px" }}
-                                        >
-                                            Registrar Pedido
-                                        </Button>
+                                                <h2>Tabla de Pedidos</h2>
                                     </div>
                                     <TablaPedidos
                                         data={pedidos}

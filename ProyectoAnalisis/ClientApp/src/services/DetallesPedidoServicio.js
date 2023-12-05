@@ -45,7 +45,7 @@ export const actualizarTotalPedido = async (idPedido) => {
 export const guardarDetalleProducto = async (detallePedido) => {
     try {
         const result = await Swal.fire({
-            title: 'Desea añadir esto a su pedido?',
+            title: 'Desea a&ntildeadir esto a su pedido?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

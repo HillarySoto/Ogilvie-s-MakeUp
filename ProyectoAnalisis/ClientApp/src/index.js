@@ -11,27 +11,23 @@ export default function App() {
     const [user, setUser] = useState({ id: 0, correo: '', rol: '' });
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    useEffect(() => {
+    const checkAuthentication = () => {
+        const token = localStorage.getItem('token');
 
-        const checkAuthentication = () => {
-            const token = localStorage.getItem('token');
+        //decodifica el token y obtiene info
+        if (token) {
+            const decoded = jwtDecode(token);
+            setUser({
+                id: decoded.id,
+                correo: decoded.correo,
+                rol: decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+            });
+            setIsAuthenticated(true);
+        } else {
+            setIsAuthenticated(false);
+        }
+    };
 
-            //decodifica el token y obtiene su info
-            if (token) {
-                const decoded = jwtDecode(token);
-                setUser({
-                    id: decoded.id,
-                    correo: decoded.correo,
-                    rol: decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-                });
-                setIsAuthenticated(true);
-            } else {
-                setIsAuthenticated(false);
-            }
-        };
-
-        checkAuthentication();
-    }, []); // este efecto se ejecute solo en el montaje inicial.
 
     const logout = () => {
         localStorage.removeItem('token');
@@ -52,12 +48,12 @@ export default function App() {
                     )}
                 </div>
             ) : (
-                    <Routes>
-                        <Route path="/" element={<Login onLogin={checkAuthentication} />} >
-                        </Route>
-                        {/* Si el usuario no está autenticado, redirige a la página de inicio de sesión */}
-                        <Route path="/*" element={<Navigate to="/" />} />
-                    </Routes>
+                <Routes>
+                    <Route path="/" element={<Login onLogin={checkAuthentication} />} >
+                    </Route>
+                    {/* Si el usuario no está autenticado, redirige a la página de inicio de sesión */}
+                    <Route path="/*" element={<Navigate to="/" />} />
+                </Routes>
             )}
         </BrowserRouter>
     );

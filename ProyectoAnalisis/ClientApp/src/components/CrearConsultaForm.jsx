@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
-
+import { jwtDecode } from "jwt-decode";//decode token
 const CrearConsultaForm = () => {
   const [idCliente, setIdCliente] = useState('');
   const [detalles, setDetalles] = useState('');
@@ -13,9 +13,19 @@ const CrearConsultaForm = () => {
   const [fecha, setFecha] = useState('');
 
   useEffect(() => {
+
+    const token = localStorage.getItem('token'); //obtener token
+
+     const decoded = jwtDecode(token);
+
+     console.log(decoded.id)
+      setIdCliente(decoded.id)
+
+    // Ahora 'token' contiene el valor almacenado en localStorage
+    console.log(token);
     const fetchProductos = async () => {
       try {
-        const response = await fetch('api/productoController/ListaProductos');
+        const response = await fetch("/api/Producto/Lista");
         const data = await response.json();
         setProductos(data.map(producto => ({ value: producto.id, label: producto.nombre })));
       } catch (error) {
@@ -62,7 +72,7 @@ const CrearConsultaForm = () => {
     }
 
     try {
-      const response = await fetch('api/consultasController/CrearConsulta', {
+      const response = await fetch('/api/consultasController/CrearConsulta', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -108,15 +118,7 @@ const CrearConsultaForm = () => {
       <h2>Crear Consulta</h2>
       {consultaEnviada && <p>Consulta enviada con éxito</p>}
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">ID Cliente:</label>
-          <input
-            type="text"
-            className="form-control"
-            value={idCliente}
-            onChange={(e) => setIdCliente(e.target.value)}
-          />
-        </div>
+ 
         <div className="mb-3">
           <label className="form-label">Detalles:</label>
           <textarea

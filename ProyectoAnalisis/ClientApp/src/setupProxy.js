@@ -14,6 +14,9 @@ const context =  [
     "/api/Inventario",
     "/api/Pedido",
     "/api/DetallePedido",
+    "/api/Consultas",
+    "/api/Envio",
+    "/api",
     "/api/Token"
 ];
 

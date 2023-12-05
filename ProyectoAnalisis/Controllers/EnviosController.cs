@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProyectoAnalisis.Models;
 using System;
 
 namespace OgilviesMakeUpModulos.Controllers
 {
-   /* [Route("api/enviosController")]
+   [Route("api/enviosController")]
     [ApiController]
     public class EnviosController : Controller
     {
@@ -42,13 +43,13 @@ namespace OgilviesMakeUpModulos.Controllers
         }
 
         [HttpPut]
-[Route("EditarEnvio/{idEnvio}")]
-public IActionResult EditarEnvio(int idEnvio, [FromBody] Envio envioModificado)
+[Route("EditarEnvio/{id}")]
+public IActionResult EditarEnvio(int id, [FromBody] Envio envioModificado)
 {
     try
     {
         // Verificar si el envío existe
-        var envioExistente = _dbcontext.Envios.Find(idEnvio);
+        var envioExistente = _dbcontext.Envios.Find(id);
 
         if (envioExistente == null)
         {
@@ -60,7 +61,7 @@ public IActionResult EditarEnvio(int idEnvio, [FromBody] Envio envioModificado)
         envioExistente.FechaEnvio = envioModificado.FechaEnvio;
         envioExistente.FechaLlegada = envioModificado.FechaLlegada;
         envioExistente.CostoEnvio = envioModificado.CostoEnvio;
-        envioExistente.CompaniaEnvio = envioModificado.CompaniaEnvio;
+        envioExistente.CompañiaEnvio = envioModificado.CompañiaEnvio;
         envioExistente.NumGuia = envioModificado.NumGuia;
 
         // Guardar los cambios en la base de datos
@@ -74,13 +75,13 @@ public IActionResult EditarEnvio(int idEnvio, [FromBody] Envio envioModificado)
     }
 }
 
-[HttpGet("ObtenerEnvio/{idEnvio}")]
-public IActionResult ObtenerEnvio(int idEnvio)
+[HttpGet("ObtenerEnvio/{id}")]
+public IActionResult ObtenerEnvio(int id)
 {
     try
     {
         // Obtén el envío desde tu base de datos o almacenamiento
-        var envio = _dbcontext.Envios.Find(idEnvio);
+        var envio = _dbcontext.Envios.Find(id);
 
         if (envio == null)
         {
@@ -90,13 +91,13 @@ public IActionResult ObtenerEnvio(int idEnvio)
         // Puedes ajustar la respuesta según tus necesidades
         return Ok(new
         {
-            IdEnvio = envio.IdEnvio,
-            IdCliente = envio.IdCliente,
+            id = envio.Id,
+            idCliente = envio.IdCliente,
             DireccionEnvio = envio.DireccionEnvio,
             FechaEnvio = envio.FechaEnvio,
             FechaLlegada = envio.FechaLlegada,
             CostoEnvio = envio.CostoEnvio,
-            CompaniaEnvio = envio.CompaniaEnvio,
+            CompaniaEnvio = envio.CompañiaEnvio,
             NumGuia = envio.NumGuia
             // Agrega otros campos según sea necesario
         });
@@ -109,12 +110,12 @@ public IActionResult ObtenerEnvio(int idEnvio)
 
 
         [HttpDelete]
-        [Route("EliminarEnvio/{idEnvio}")]
-        public IActionResult EliminarEnvio(int idEnvio)
+        [Route("EliminarEnvio/{id}")]
+        public IActionResult EliminarEnvio(int id)
         {
             try
             {
-                var envio = _dbcontext.Envios.Find(idEnvio);
+                var envio = _dbcontext.Envios.Find(id);
 
                 if (envio == null)
                 {
@@ -132,5 +133,6 @@ public IActionResult ObtenerEnvio(int idEnvio)
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Error al eliminar el envío", Error = ex.Message });
             }
         }
-    }*/
+    }
 }
+

@@ -40,7 +40,7 @@ const ListaEnvios = () => {
     fetchEnvios();
   }, []);
 
-  const handleDelete = async (idEnvio) => {
+  const handleDelete = async (Id) => {
     try {
       const result = await Swal.fire({
         title: '¿Está seguro?',
@@ -55,7 +55,7 @@ const ListaEnvios = () => {
 
       if (result.isConfirmed) {
         // Realizar la operación de eliminación
-        const response = await fetch(`api/enviosController/EliminarEnvio/${idEnvio}`, {
+        const response = await fetch(`api/enviosController/EliminarEnvio/${Id}`, {
           method: 'DELETE',
         });
 
@@ -103,22 +103,22 @@ const ListaEnvios = () => {
         </thead>
         <tbody>
           {filteredEnvios.map((envio) => (
-            <tr key={envio.idEnvio}>
-              <td>{envio.idEnvio}</td>
+            <tr key={envio.id}>
+              <td>{envio.id}</td>
               <td>{envio.idCliente}</td>
               <td>{envio.direccionEnvio}</td>
               <td>{envio.fechaEnvio}</td>
               <td>{envio.fechaLlegada}</td>
               <td>{envio.costoEnvio}</td>
-              <td>{envio.companiaEnvio}</td>
+              <td>{envio.compañiaEnvio}</td>
               <td>{envio.numGuia}</td>
               <td>
-                <Link to={`/editar-envio/${envio.idEnvio}`} className="btn btn-primary me-2">
+                <Link to={`/editar-envio/${envio.id}`} className="btn btn-primary me-2">
                   Editar Envío
                 </Link>
                 <button
                   className="btn btn-danger"
-                  onClick={() => handleDelete(envio.idEnvio)}
+                  onClick={() => handleDelete(envio.id)}
                 >
                   Eliminar Envío
                 </button>

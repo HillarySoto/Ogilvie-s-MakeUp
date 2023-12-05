@@ -11,13 +11,13 @@ const ProveedorPage = () => {
 
   // Consume el servicio mostrarProveedores
   const getProveedores = async () => {
-    const data = await mostrarProveedores(); 
+    const data = await mostrarProveedores(); // Llama al servicio
     setProveedores(data);
   };
 
   // Actualiza proveedor
   const updProveedor = async (proveedor) => {
-    const rs = await editarProveedor(proveedor.id, proveedor);
+    const rs = await editarProveedor(proveedor, mostrarProveedores);
     if (rs) {
       getProveedores();
     }
@@ -36,7 +36,7 @@ const ProveedorPage = () => {
   // Actualiza el estado de proveedores (lista de proveedores)
   useEffect(() => {
     getProveedores();
-  }, [proveedores]);
+  }, []);
 
   return (
     <Container>

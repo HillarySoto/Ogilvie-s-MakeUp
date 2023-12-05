@@ -12,7 +12,8 @@ import Sidebar from "../sidebarfiles/Sidebar";
 import EditarEnvio from "./EditarEnvio";
 import ClientsPage from "../pages/ClientsPage";
 import Pagos from "../pages/PaymentPage"
-import InventarioPage from "../pages/InventarioPage";
+import InventarioPage from '../pages/InventarioPage';
+import PedidosPage from '../pages/PedidosPage';
 
 function AdminDashboard({user, logout}) {
     return (
@@ -26,7 +27,7 @@ function AdminDashboard({user, logout}) {
                 <Route path="/proveedores" element={<ProveedorPage />} />
                 <Route path="/inventario" element={<InventarioPage />} />
                 <Route path="/clientes" element={<ClientsPage />} />
-                <Route path="/pedidos" element={<ListaPedidos />} />
+                <Route path="/pedido" element={<PedidosPage />} />
                 <Route path="/envios" element={<ListaEnvios />} />
                 <Route path="/formulario-consulta" element={<CrearConsultaForm />} />
                 <Route path="/editar-envio/:idEnvio" element={<EditarEnvio />} />

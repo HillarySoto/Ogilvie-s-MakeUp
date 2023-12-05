@@ -17,7 +17,7 @@ public partial class OgilviesmakeupContext : DbContext
 
     public virtual DbSet<Carrito> Carritos { get; set; }
 
-    public virtual DbSet<Categorium> Categoria { get; set; }
+    public virtual DbSet<Categoria> Categoria { get; set; }
 
     public virtual DbSet<DetallePedido> DetallePedidos { get; set; }
 
@@ -71,7 +71,7 @@ public partial class OgilviesmakeupContext : DbContext
                 .HasConstraintName("FK_Carrito_Producto");
         });
 
-        modelBuilder.Entity<Categorium>(entity =>
+        modelBuilder.Entity<Categoria>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__categori__3213E83F165822B2");
 
@@ -325,11 +325,7 @@ public partial class OgilviesmakeupContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("nombre");
-            entity.Property(e => e.Precio).HasColumnName("precio");
-            entity.Property(e => e.Subcategoria)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("subcategoria");
+            entity.Property(e => e.Precio).HasColumnName("precio");         
 
             entity.HasOne(d => d.IdCategoriaNavigation).WithMany(p => p.Productos)
                 .HasForeignKey(d => d.IdCategoria)

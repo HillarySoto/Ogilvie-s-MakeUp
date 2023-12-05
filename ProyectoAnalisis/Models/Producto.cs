@@ -17,15 +17,13 @@ public partial class Producto
 
     public int? IdCategoria { get; set; }
 
-    public string? Subcategoria { get; set; }
-
     public string? Marca { get; set; }
 
     public virtual ICollection<Carrito> Carritos { get; set; } = new List<Carrito>();
 
     public virtual ICollection<DetallePedido> DetallePedidos { get; set; } = new List<DetallePedido>();
 
-    public virtual Categorium? IdCategoriaNavigation { get; set; }
+    public virtual Categoria? IdCategoriaNavigation { get; set; }
 
     public virtual Proveedor? IdProveedorNavigation { get; set; }
 

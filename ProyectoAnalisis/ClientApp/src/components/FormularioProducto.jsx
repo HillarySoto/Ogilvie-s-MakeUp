@@ -1,43 +1,35 @@
 ﻿import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, ModalFooter, Button } from "reactstrap";
+import Swal from "sweetalert2";
+import { mostrarProductos } from "../services/ProductoServicio";
 
 const modeloProducto = {
     id: 0,
-    categoria: "",
-    color: "",
-    marca: "",
+    idProveedor: 0,
     nombre: "",
+    imagen: "",
     precio: 0.0,
+    idCategoria: 0,
+    subcategoria: "",
+    marca: ""
 };
 
-const categoriasMaquillaje = [
-    "Base y Correctores",
-    "Ojos",
-    "Labios",
-    "Mejillas",
-    "Cejas",
-    "Herramientas y Accesorios",
-    "Productos Específicos",
-    "Maquillaje Corporal",
-    "Maquillaje Artístico",
-    "Productos para el Cuidado de la Piel",
-];
-
-const colores = [
-    "Rojo",
-    "Verde",
-    "Azul",
-    "Amarillo",
-    "Magenta",
-    "Cian",
-    "Gris",
-    // Puedes agregar más colores según sea necesario
-];
-
-const FormularioProducto = ({ mostrarModal, setMostrarModal, guardarProducto, editar, setEditar, editarProducto }) => {
+const FormularioProducto = ({ mostrarModal, setMostrarModal, guardarProducto, editar, setEditar, editarProducto, mostrarProductos }) => {
     const [producto, setProducto] = useState(modeloProducto);
+    const [proveedores, setProveedores] = useState([]);
+    const [categorias, setCategorias] = useState([]);
 
     useEffect(() => {
+        fetch("/api/Proveedor/Lista")
+            .then(response => response.json())
+            .then(data => setProveedores(data))
+            .catch(error => console.error('Error al cargar proveedores:', error));
+
+        fetch("/api/Categoria/Lista")
+            .then(response => response.json())
+            .then(data => setCategorias(data))
+            .catch(error => console.error('Error al cargar categorías:', error));
+
         if (editar != null) {
             setProducto(editar);
         } else {
@@ -52,17 +44,19 @@ const FormularioProducto = ({ mostrarModal, setMostrarModal, guardarProducto, ed
         });
     };
 
-    const enviarDatos = () => {
+    const enviarDatos = async () => {
         if (producto.id === 0) {
-            guardarProducto(producto);
+            await guardarProducto(producto, setMostrarModal);
+            mostrarProductos();
         } else {
-            editarProducto(producto);
+            await editarProducto(producto, setMostrarModal);
+            mostrarProductos();
         }
         setProducto(modeloProducto);
     };
 
     const cerrarModal = () => {
-        setMostrarModal(!mostrarModal);
+        setMostrarModal(false);
         setEditar(null);
     };
 
@@ -75,44 +69,44 @@ const FormularioProducto = ({ mostrarModal, setMostrarModal, guardarProducto, ed
             <ModalBody>
                 <Form>
                     <FormGroup>
+                        <Label>Proveedor</Label>
+                        <Input
+                            type="select"
+                            name="idProveedor"
+                            onChange={(e) => actualizarDato(e)}
+                            value={producto.idProveedor}
+                        >
+                            <option value="" disabled>Selecciona un proveedor</option>
+                            {proveedores.map((proveedor) => (
+                                <option key={proveedor.id} value={proveedor.id}>
+                                    {proveedor.nombreEmpresa}
+                                </option>
+                            ))}
+                        </Input>
+                    </FormGroup>
+                    <FormGroup>
                         <Label>Categoría</Label>
                         <Input
                             type="select"
-                            name="categoria"
+                            name="idCategoria"
                             onChange={(e) => actualizarDato(e)}
-                            value={producto.categoria}
+                            value={producto.idCategoria}
                         >
                             <option value="" disabled>Selecciona una categoría</option>
-                            {categoriasMaquillaje.map((categoria, index) => (
-                                <option key={index} value={categoria}>
-                                    {categoria}
+                            {categorias.map((categoria) => (
+                                <option key={categoria.id} value={categoria.id}>
+                                    {categoria.nombre}
                                 </option>
                             ))}
                         </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>Color</Label>
-                        <Input
-                            type="select"
-                            name="color"
-                            onChange={(e) => actualizarDato(e)}
-                            value={producto.color}
-                        >
-                            <option value="" disabled>Selecciona un color</option>
-                            {colores.map((color, index) => (
-                                <option key={index} value={color}>
-                                    {color}
-                                </option>
-                            ))}
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>Marca</Label>
-                        <Input name="marca" onChange={(e) => actualizarDato(e)} value={producto.marca} />
                     </FormGroup>
                     <FormGroup>
                         <Label>Nombre</Label>
                         <Input name="nombre" onChange={(e) => actualizarDato(e)} value={producto.nombre} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Marca</Label>
+                        <Input name="marca" onChange={(e) => actualizarDato(e)} value={producto.marca} />
                     </FormGroup>
                     <FormGroup>
                         <Label>Precio</Label>
@@ -120,6 +114,7 @@ const FormularioProducto = ({ mostrarModal, setMostrarModal, guardarProducto, ed
                     </FormGroup>
                 </Form>
             </ModalBody>
+
             <ModalFooter>
                 <Button color="primary" size="sm" onClick={enviarDatos}>
                     Guardar

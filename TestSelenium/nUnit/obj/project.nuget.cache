@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "OtRA7SlQF5JCukG2NqtIYUJ43hW8j0PPn/IhexvI2jSpPSL3Djk2JgVjuBfIm9y/38K2X+jCgbbIKXsYY37/eA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\josjo\\OneDrive\\Escritorio\\TestSelenium\\nUnit\\Test Selenium.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\josjo\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\josjo\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\josjo\\.nuget\\packages\\nunit\\4.0.1\\nunit.4.0.1.nupkg.sha512",
+    "C:\\Users\\josjo\\.nuget\\packages\\selenium.webdriver\\4.15.0\\selenium.webdriver.4.15.0.nupkg.sha512",
+    "C:\\Users\\josjo\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

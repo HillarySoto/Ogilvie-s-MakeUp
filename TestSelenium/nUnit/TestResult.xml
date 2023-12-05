@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-run id="0" runstate="Runnable" testcasecount="0" result="Failed" label="Invalid" total="0" passed="0" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.15.4.0" clr-version="4.0.30319.42000" start-time="2023-12-05 08:09:30Z" end-time="2023-12-05 08:09:30Z" duration="0.821610">
+  <command-line><![CDATA["C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\bin\net35\nunit3-console.exe" C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\InventarioVerTest.cs]]></command-line>
+  <test-suite type="Unknown" id="1-1" name="InventarioVerTest.cs" fullname="C:\Users\josjo\OneDrive\Escritorio\TestSelenium\nUnit\InventarioVerTest.cs" testcasecount="0" runstate="NotRunnable" result="Failed" label="Invalid">
+    <properties>
+      <property name="_SKIPREASON" value="File type is not supported" />
+    </properties>
+    <reason>
+      <message>File type is not supported</message>
+    </reason>
+  </test-suite>
+</test-run>

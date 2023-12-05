@@ -10,21 +10,23 @@ import { jwtDecode } from "jwt-decode"; // decode token
 export default function App() {
     const [user, setUser] = useState({ id: 0, correo: '', rol: '' });
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [token, setToken] = useState(localStorage.getItem('token'));
 
     const checkAuthentication = () => {
-        const token = localStorage.getItem('token');
 
-        //decodifica el token y obtiene info
-        if (token) {
-            const decoded = jwtDecode(token);
+        const jwtoken = localStorage.getItem('token');
+
+        //decodifica el token y obtiene su info
+        if (jwtoken) {
+            const decoded = jwtDecode(jwtoken);
             setUser({
                 id: decoded.id,
                 correo: decoded.correo,
                 rol: decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
             });
-            setIsAuthenticated(true);
+            setToken(jwtoken)
         } else {
-            setIsAuthenticated(false);
+            setToken(null);
         }
     };
 
@@ -33,15 +35,16 @@ export default function App() {
         localStorage.removeItem('token');
         setUser(null);
         setIsAuthenticated(false);
+        setToken(null);
     };
 
     return (
         <BrowserRouter>
-            {isAuthenticated ? (
+            {token ? (
                 <div>
+                    <AdminDashboard user={user} logout={logout} />
                     {user.rol === "Admin" ? (
-                        <div >
-                            <AdminDashboard user={user} logout={logout} />
+                        <div >                            
                         </div>
                     ) : (
                         <ClientDashboard user={user} logout={logout} />
@@ -51,8 +54,6 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Login onLogin={checkAuthentication} />} >
                     </Route>
-                    {/* Si el usuario no está autenticado, redirige a la página de inicio de sesión */}
-                    <Route path="/*" element={<Navigate to="/" />} />
                 </Routes>
             )}
         </BrowserRouter>

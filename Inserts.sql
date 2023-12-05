@@ -203,7 +203,7 @@ insert into pedido (idCliente, total, estado)
 values (4, 57000, 1);
 
 insert into pedido (idCliente, total, estado)
-values (3, 7000, 1);
+values (16, 7000, 1);
 
 insert into pedido (idCliente, total, estado)
 values (2, 14750, 1);

@@ -20,10 +20,9 @@ function AdminDashboard({user, logout}) {
         <div style={{ display: 'flex' }}>
             <Sidebar rol={user.rol} logout={logout} />
             <Routes>
-                <Route path="/info" element={<ListaPedidos />}>
-                    <Route index element={<ListaPedidos />} />
-                </Route>
-                <Route path="/productos" element={<ProductoPage />} />
+                <Route path="/productos" element={<ProductoPage />}>
+                    <Route index element={<ProductoPage />} />
+                </Route> 
                 <Route path="/proveedores" element={<ProveedorPage />} />
                 <Route path="/inventario" element={<InventarioPage />} />
                 <Route path="/clientes" element={<ClientsPage />} />

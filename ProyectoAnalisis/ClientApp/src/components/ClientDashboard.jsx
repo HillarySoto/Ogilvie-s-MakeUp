@@ -8,7 +8,9 @@ const ClientDashboard = ({user, logout}) => {
         <div style={{ display: 'flex' }}>
             <Sidebar rol={user.rol} logout={logout} />
             <Routes>
-                <Route path="/vistaclientes" element={<ClientHome />} />
+                <Route path="/vistaclientes" element={<ClientHome />} >
+                    <Route index element={<ClientHome />} />
+                </Route>
                 {/* Otras rutas para el cliente */}
             </Routes>
         </div>

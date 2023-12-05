@@ -11,7 +11,7 @@
     "ProyectoAnalisis": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5050",
+      "applicationUrl": "http://localhost:7080",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
